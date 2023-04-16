@@ -1,7 +1,9 @@
 import React from 'react';
-import { Flex, SimpleGrid, Button, Text, Box, Card, Heading, Image} from "@chakra-ui/react"
+import { Flex, SimpleGrid, Button, Text, Box, Card, Heading, Image, IconButton} from "@chakra-ui/react"
 import { LugarCard } from '../components/LugarCard';
 import { useEffect } from "react";
+import { Usuario } from '../components/usuario';
+import { ArrowBackIcon } from "@chakra-ui/icons";
 
 const items = [
     {
@@ -40,12 +42,16 @@ function PaqueteDetailPage(){
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  const handleBack=()=>{
+    window.history.back()
+  }
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
             <SimpleGrid columns={[1,2,3]} spacing={{ base: '1em', md: '2em', lg: '3em' }} width="100%">
-                <Button bg="#f5d494" size="sm" width="30%"  justifySelf="start">Regresar</Button>
+            <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
                 <Text fontSize="30" fontWeight="bold"  justifySelf="center">NOMBRE PAQUETE</Text>
-                <Button bg="#f5d494" size="sm" width="30%"  justifySelf="end">Perfil</Button>
+                <Usuario/>
             </SimpleGrid>
 
             <div style={{ display: 'flex', width: '100%', marginTop: "2em" }}>

@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { FaFacebook, FaTwitter, FaWhatsapp, FaEllipsisV, FaShoppingCart  } from 'react-icons/fa';
 import ShoppingCart from './ShoppingCart';
+import { Usuario } from '../components/usuario';
 
 
 const items = [
@@ -61,26 +62,13 @@ const items = [
   ];
 
 function Home() {
-  const navigate = useNavigate()
-  const handleShoppingCart = ()=>{
-    navigate("./ShoppingCart")
-  }
-  
     return (
       <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
         <SimpleGrid column={3} alignItems={"center"} width={"100%"} >
             <Box></Box>
             <Heading gridColumn={"2"} textAlign={"center"}>TRABI</Heading>
         <Box gridColumn={"3"} justifySelf={"end"} mr={10}>
-            <Button colorScheme='black' leftIcon={<FaShoppingCart />} variant={"ghost"} mr={2} onClick={handleShoppingCart}>        
-            </Button>
-            <Menu>
-                <MenuButton as={Avatar} name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size="md" />
-                <MenuList>
-                    <MenuItem>Perfil</MenuItem>
-                    <MenuItem>Cerrar sesión</MenuItem>
-                </MenuList>
-            </Menu>
+            <Usuario/>
         </Box>
         </SimpleGrid>
         <Box maxWidth={{base: "90%", md: "80%", lg: "60%"}} mx="auto" mb={7}>

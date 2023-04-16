@@ -1,5 +1,7 @@
-import { useMediaQuery, Flex, Heading, Card, Image, Text, Stack, CardBody, CardFooter, Button, Box  } from '@chakra-ui/react'
+import { useMediaQuery, Flex, Heading, Card, Image, IconButton, Text, SimpleGrid, Stack, CardBody, CardFooter, Button, Box  } from '@chakra-ui/react'
 import { useEffect } from "react";
+import { Usuario } from '../components/usuario';
+import { ArrowBackIcon } from "@chakra-ui/icons";
 
 const items = [
     {
@@ -43,11 +45,18 @@ function ShoppingCart(){
     useEffect(() => {
         window.scrollTo(0, 0);
       }, []);
+      const handleBack=()=>{
+        window.history.back()
+      }
     return(
         <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
-            <Flex  textAlign="center">
-                <Heading>CARRITO DE COMPRAS</Heading>
-            </Flex>
+            <SimpleGrid column={3} alignItems={"center"} width={"100%"} >
+            <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
+                <Heading gridColumn={"2"} textAlign={"center"}>CARRITO DE COMPRAS</Heading>
+            <Box gridColumn={"3"} justifySelf={"end"} mr={10}>
+                <Usuario/>
+            </Box>
+            </SimpleGrid>
             <Flex justifyContent="space-between" alignItems="center" flexDirection={isLargerThanMd ? "row" : "column"} mt={10}>
                 <Box marginLeft={{ base: "0", md: "-10%" }}>
                     <Stack spacing={4}>

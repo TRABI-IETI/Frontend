@@ -1,7 +1,9 @@
-import { Flex, Stack, Heading, Card, Image, CardBody, Text, CardFooter, Button} from "@chakra-ui/react";
+import { Flex, Stack, Heading, SimpleGrid, Box, Card, Image, CardBody, Text, CardFooter, Button, IconButton} from "@chakra-ui/react";
 import { LugarCard } from "../components/LugarCard";
 import { PaqueteCard } from "../components/BuyCard";
 import { useEffect } from "react";
+import { Usuario } from '../components/usuario';
+import { ArrowBackIcon } from "@chakra-ui/icons";
 
 const items = [
     {
@@ -52,11 +54,19 @@ function Lugares() {
         window.scrollTo(0, 0);
         }, []);
 
+    const handleBack=()=>{
+      window.history.back()
+    }
+
   return (
     <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
-        <Flex justifyContent="center" alignItems="center" mb={4} flexDirection="row" mt="4">
-            <Heading>LUGARES</Heading>
-        </Flex>
+        <SimpleGrid column={3} alignItems={"center"} width={"100%"} >
+            <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
+            <Heading gridColumn={"2"} textAlign={"center"}>LUGARES</Heading>
+        <Box gridColumn={"3"} justifySelf={"end"} mr={10}>
+            <Usuario/>
+        </Box>
+        </SimpleGrid>
         <Flex justifyContent="space-between" alignItems="center">
           <Stack spacing={3}>
             {items.map((item) => (
