@@ -42,7 +42,7 @@ function ShoppingCart(){
     return(
         <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
             <Flex  textAlign="center">
-                <Heading>Carro de compras</Heading>
+                <Heading>CARRITO DE COMPRAS</Heading>
             </Flex>
             <Flex justifyContent="space-between" alignItems="center" flexDirection={isLargerThanMd ? "row" : "column"} mt={10}>
                 <Box marginLeft={{ base: "0", md: "-10%" }}>

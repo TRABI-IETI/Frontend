@@ -8,7 +8,7 @@ function App() {
   
   
   return (
-    <Box bg="#86ce80" minHeight="100vh">
+    <Box bg='linear-gradient(to bottom, #20cbc7, #86ce80)' minHeight="100vh">
         <AppRouter></AppRouter>
     </Box>
   );
