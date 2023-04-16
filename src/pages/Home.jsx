@@ -1,5 +1,6 @@
 import { Carousel } from 'react-responsive-carousel';
 import { Flex, Heading, Card, Box, Image, Text , WrapItem, Avatar, Divider, SimpleGrid, Link } from '@chakra-ui/react'
+// import { Link } from "react-router-dom";
 // import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -39,20 +40,20 @@ const items = [
   const items2 = [
     {
       title: "PAQUETES",
-      description: "Description for card 1.",
-      image: "https://via.placeholder.com/150",
+      description: "Revisa todos los paquetes que tenemos para ti, con los mejores precios y los mejores lugares.",
+      image: "https://elviajerofeliz.com/wp-content/uploads/2022/09/Mejor-Sitio-Web-de-Paquetes-de-Viaje.jpg",
       url: "/Paquetes",
     },
     {
       title: "LUGARES",
-      description: "Description for card 2.",
-      image: "https://via.placeholder.com/150",
+      description: "Cada lugar es unico y hay muchas posibilidades para diferentes gustos, revisa el que mas te guste y añadelo a tu trabi.",
+      image: "https://static.wixstatic.com/media/b37859_ed70c3b57781436788724024d73a4102~mv2.jpg/v1/fill/w_640,h_356,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/b37859_ed70c3b57781436788724024d73a4102~mv2.jpg",
       url: "/Lugares",
     },
     {
       title: "MIS TRABI",
-      description: "Description for card 3.",
-      image: "https://via.placeholder.com/150",
+      description: "Tus trabis te esperan con muchas experiencias y aventuras. Mira lo que has comprado para que no se te escape nada.",
+      image: "https://ecdn.teacherspayteachers.com/thumbitem/Mis-Viajes-My-Travels-Review-Quiz-3059608-1603366401/original-3059608-1.jpg",
       url: "/Mistrabi",
     },
   ];
@@ -87,12 +88,12 @@ function Home() {
         </Box>
         <Divider/>
         <Flex mt={"7"}>
-            <SimpleGrid columns={[1, 2, 3]} spacing="15em">
+            <SimpleGrid columns={[1, 2, 3]} spacing="7em" mr={"10"} ml={"10"}>
                 {items2.map((item) => (
                     <Box key={item.title}>
-                    <Link to={item.url} style={"text-decoration: none"}>
+                    <Link to={item.url} style={{textDecoration: 'none'}}>
                         <Card boxShadow="base" cursor="pointer">
-                        <Image src={item.image} alt={item.title} />
+                        <Image src={item.image} alt={item.title} height="200px" objectFit="cover"/>
                         <Box p={4}>
                             <Heading size="md">{item.title}</Heading>
                             <Text mt={4}>{item.description}</Text>
@@ -104,7 +105,10 @@ function Home() {
             </SimpleGrid>
         </Flex>
         <Divider/>
-
+        <Flex mt={7}>
+            <Heading>SOBRE NOSOTROS</Heading>
+            
+        </Flex>
       </Flex>
     );
   }
