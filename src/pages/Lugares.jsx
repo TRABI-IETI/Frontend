@@ -1,7 +1,8 @@
 import { Flex, Stack, Heading, SimpleGrid, Box, Card, Image, CardBody, Text, CardFooter, Button, IconButton} from "@chakra-ui/react";
 import { LugarCard } from "../components/LugarCard";
 import { PaqueteCard } from "../components/BuyCard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import getPlaces from "../services/placesServices";
 import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 
@@ -50,9 +51,12 @@ const items = [
 
 function Lugares() {
 
+  const [lugares, setLugares] = useState([]);
+
     useEffect(() => {
         window.scrollTo(0, 0);
-        }, []);
+        getPlaces().then((lugares) => setLugares(lugares));
+      }, [])
 
     const handleBack=()=>{
       window.history.back()
@@ -69,7 +73,7 @@ function Lugares() {
         </SimpleGrid>
         <Flex justifyContent="space-between" alignItems="center">
           <Stack spacing={3}>
-            {items.map((item) => (
+            {lugares.map((item) => (
               <PaqueteCard paquete={item}/>
             ))}
           </Stack>
