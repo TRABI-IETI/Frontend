@@ -57,7 +57,7 @@ function ShoppingCart(){
                         ))}
                     </Stack>
                 </Box>
-                <Box style={{ flex: '0 0 30%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                <Box style={{ flex: '0 0 25%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
                     <Card textAlign={"center"} style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }}>
                         <Heading mb={10} mt={10} mr={10} ml={10}>Total a pagar:</Heading>
                         <p mr={10} ml={10}>Total: ${totalPrice}</p>
