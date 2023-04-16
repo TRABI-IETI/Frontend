@@ -6,7 +6,7 @@ export default async function getPlaces() {
     ).json();
 };
 
-export default async function getPlace(place) {
+export async function getPlace(place) {
     return await(
         await fetch(
             "http://localhost:8082/v1/places/"+place
