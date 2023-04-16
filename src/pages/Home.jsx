@@ -80,7 +80,7 @@ function Home() {
           <Carousel showThumbs={false} showStatus={false} showArrows={true} infiniteLoop autoPlay interval={3000}>
             {items.map((item) => (
               <Box key={item.title} p={4}>
-                <Card boxShadow="base">
+                <Card boxShadow="base" >
                   <Image src={item.image} alt={item.title} />
                   <Box p={4}>
                     <Heading size="md">{item.title}</Heading>
@@ -97,7 +97,7 @@ function Home() {
                 {items2.map((item) => (
                     <Box key={item.title} minWidth={{ base: '100%', md: '400px', lg: '200px' }}>
                     <Link to={item.url} style={{textDecoration: 'none'}}>
-                        <Card boxShadow="base" cursor="pointer">
+                        <Card style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }} cursor="pointer">
                         <Image src={item.image} alt={item.title} height="200px" objectFit="cover"/>
                         <Box p={4}>
                             <Heading size="md">{item.title}</Heading>
@@ -111,7 +111,7 @@ function Home() {
         </Flex>
         <Divider/>
         <Flex mt={7} justifyContent= "center" alignItems= "center" flexDirection="column" mb={10}>
-            <Card boxShadow="base" maxWidth="50em" mx="auto" textAlign="center">
+            <Card style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }} maxWidth="50em" mx="auto" textAlign="center">
                 <Heading mb={3} mt={5}>SOBRE NOSOTROS</Heading>
                 <Text mr={10} ml={10} textAlign={"justify"} mb={10}>Somos una empresa enfocada en que nuestros clientes conozcan los lugares mas significativos de colombia, empezando por parques, lugares historicos, museos y restaurantes.
                     Te ayudamos a organizar tu viaje, generandote un intinerario o dejandote en la libertad de decidir que te gusta y que quieres conocer. Con nosotros puedes ahorrarte filas y lo

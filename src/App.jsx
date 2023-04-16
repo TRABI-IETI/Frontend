@@ -4,7 +4,6 @@ import { Carousel } from 'react-responsive-carousel';
 import { Flex, Heading, Card, Box, Image, Text } from '@chakra-ui/react'
 import { AppRouter } from './AppRouter';
 import Home from './pages/Home';
-
 function App() {
   
   
