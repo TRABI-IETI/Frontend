@@ -74,7 +74,7 @@ function Lugares() {
         </SimpleGrid>
         <Flex justifyContent="space-between" alignItems="center">
           <Stack spacing={3}>
-            {items.map((item) => (
+            {lugares.map((item) => (
               <Link to={`/descripcionLugar/${item.title}`} style={{textDecoration: 'none'}}>
               <PaqueteCard paquete={item}/>
               </Link>
