@@ -1,5 +1,6 @@
-import { useMediaQuery, Flex, Heading, Card, Image, Text, Stack, CardBody, CardFooter, Button, Box  } from '@chakra-ui/react'
+import { useMediaQuery, Flex, Heading, Card, Image, Text, Stack, CardBody, CardFooter, Button, Box, SimpleGrid  } from '@chakra-ui/react'
 import { useEffect } from "react";
+import { PaqueteCard } from '../components/BuyCard';
 
 const items = [
     {
@@ -44,15 +45,36 @@ function ShoppingCart(){
         window.scrollTo(0, 0);
       }, []);
     return(
-        <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
-            <Flex  textAlign="center">
+        <Flex flexDirection={{ base: 'column', md: 'column' }}>
+            <Flex  alignSelf={"center"}>
                 <Heading>CARRITO DE COMPRAS</Heading>
             </Flex>
-            <Flex justifyContent="space-between" alignItems="center" flexDirection={isLargerThanMd ? "row" : "column"} mt={10}>
-                <Box marginLeft={{ base: "0", md: "-10%" }}>
+            <div style={{ display: 'flex', width: '100%', marginTop: "2em" }}>
+                <Box style={{ flex: '0 0 65%', marginRight: '1em', marginLeft: '2em'  }}>
                     <Stack spacing={4}>
-                        {items.map((item, index) => (
-                            <Card key={index} overflow="hidden" variant="outline" style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }}>
+                        {items.map((item) => (
+                            <PaqueteCard paquete={item}/>
+                        ))}
+                    </Stack>
+                </Box>
+                <Box style={{ flex: '0 0 30%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                    <Card textAlign={"center"} style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }}>
+                        <Heading mb={10} mt={10} mr={10} ml={10}>Total a pagar:</Heading>
+                        <p mr={10} ml={10}>Total: ${totalPrice}</p>
+                        <Button mb={10} mt={10} mr={10} ml={10} color="black" background="#f5d494">Pagar</Button>
+                    </Card>
+                </Box>
+            </div>        
+        </Flex>
+        
+    )
+}
+
+export default ShoppingCart;
+
+/*
+
+<Card key={index} overflow="hidden" variant="outline" style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }}>
                                 <Flex>
                                     <Box>
                                         <Image
@@ -77,20 +99,4 @@ function ShoppingCart(){
                                     </Box>
                                 </Flex>
                             </Card>
-                        ))}
-                    </Stack>
-                </Box>
-                <Box marginBottom={"40%"}>
-                    <Card textAlign={"center"} style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }}>
-                        <Heading mb={10} mt={10} mr={10} ml={10}>Total a pagar:</Heading>
-                        <p mr={10} ml={10}>Total: ${totalPrice}</p>
-                        <Button mb={10} mt={10} mr={10} ml={10} color="black" background="#f5d494">Pagar</Button>
-                    </Card>
-                </Box>
-            </Flex>
-        </Flex>
-        
-    )
-}
-
-export default ShoppingCart;
+*/
