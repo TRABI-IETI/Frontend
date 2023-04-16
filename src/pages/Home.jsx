@@ -41,7 +41,7 @@ function Home() {
   
     return (
       <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
-        <Flex justifyContent="center" alignItems="center" mb={4} flexDirection="row" >
+        <Flex >
             <Heading>TRABI</Heading>
         {/* </Flex> */}
         {/* <Flex justifyContent={"flex-end"} flexDirection="row"> */}
