@@ -1,7 +1,8 @@
 import { Flex, Stack, Heading, Card, Image, CardBody, Text, CardFooter, Button} from "@chakra-ui/react";
 import { LugarCard } from "../components/LugarCard";
 import { PaqueteCard } from "../components/BuyCard";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import getPlaces from "../services/placesServices";
 
 const items = [
     {
@@ -48,10 +49,14 @@ const items = [
 
 function Lugares() {
 
+  const [lugares, setLugares] = useState([]);
+
     useEffect(() => {
         window.scrollTo(0, 0);
-        }, []);
+        getPlaces().then((lugares) => setLugares(lugares));
+      }, [])
 
+  console.log(lugares)
   return (
     <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
         <Flex justifyContent="center" alignItems="center" mb={4} flexDirection="row" mt="4">
@@ -59,7 +64,7 @@ function Lugares() {
         </Flex>
         <Flex justifyContent="space-between" alignItems="center">
           <Stack spacing={3}>
-            {items.map((item) => (
+            {lugares.map((item) => (
               <PaqueteCard paquete={item}/>
             ))}
           </Stack>

@@ -1,4 +1,4 @@
-const getPlaces = async () => {
+export default async function getPlaces() {
     return await(
         await fetch(
             "http://localhost:8082/v1/places"
@@ -6,4 +6,10 @@ const getPlaces = async () => {
     ).json();
 };
 
-export default getPlaces();
+export default async function getPlace(place) {
+    return await(
+        await fetch(
+            "http://localhost:8082/v1/places/"+place
+            )
+    ).json();
+};
