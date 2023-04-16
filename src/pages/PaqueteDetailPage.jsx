@@ -4,6 +4,7 @@ import { LugarCard } from '../components/LugarCard';
 import { useEffect } from "react";
 import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import { useParams } from 'react-router';
 
 const items = [
     {
@@ -39,6 +40,7 @@ const items = [
   ];
 
 function PaqueteDetailPage(){
+  const {paqueteId} = useParams();
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -50,7 +52,7 @@ function PaqueteDetailPage(){
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
             <SimpleGrid columns={[1,2,3]} spacing={{ base: '1em', md: '2em', lg: '3em' }} width="100%">
             <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
-                <Text fontSize="30" fontWeight="bold"  justifySelf="center">NOMBRE PAQUETE</Text>
+                <Text fontSize="30" fontWeight="bold"  justifySelf="center">{paqueteId}</Text>
                 <Usuario/>
             </SimpleGrid>
 

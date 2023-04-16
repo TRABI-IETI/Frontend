@@ -3,6 +3,7 @@ import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart'
 import Paquetes from './pages/Paquetes';
 import PaqueteDetailPage from './pages/PaqueteDetailPage';
+import LugarDetailPage from './pages/LugarDetailPage';
 import Lugares from './pages/Lugares';
 
 export function AppRouter(){
@@ -10,18 +11,11 @@ export function AppRouter(){
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Home />} />
-          </Routes>
-          <Routes>
             <Route path="/shoppingCart" element={<ShoppingCart />} />
-          </Routes>
-          <Routes>
             <Route path="/paquetes" element={<Paquetes />} />
-          </Routes>
-          <Routes>
             <Route path="/lugares" element={<Lugares />} />
-          </Routes>
-          <Routes>
-            <Route path="/descripcionLugar" element={<PaqueteDetailPage />} />
+            <Route path="/descripcionPaquete/:paqueteId" element={<PaqueteDetailPage />} />
+            <Route path="/descripcionLugar/:lugarId" element={<LugarDetailPage />} />
           </Routes>
         </BrowserRouter>
       );
