@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Carousel } from 'react-responsive-carousel';
 // import './style/app.css'
 import { Flex, Heading, Card, Box, Image, Text } from '@chakra-ui/react'
+import { AppRouter } from './AppRouter';
 import Home from './pages/Home';
 
 function App() {
@@ -9,7 +10,7 @@ function App() {
   
   return (
     <Box bg="#8ebf55" minHeight="100vh">
-    <Home/>
+        <AppRouter></AppRouter>
     </Box>
   );
 }

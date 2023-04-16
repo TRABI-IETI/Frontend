@@ -1,6 +1,6 @@
 import { Carousel } from 'react-responsive-carousel';
-import { Flex, Heading, Card, Box, Image, Text , WrapItem, Avatar, Divider, SimpleGrid, Link } from '@chakra-ui/react'
-// import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
+import { Flex, Heading, Card, Box, Image, Text , Divider, SimpleGrid } from '@chakra-ui/react'
+import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const items = [
@@ -90,7 +90,7 @@ function Home() {
             <SimpleGrid columns={[1, 2, 3]} spacing="15em">
                 {items2.map((item) => (
                     <Box key={item.title}>
-                    <Link to={item.url} style={"text-decoration: none"}>
+                    <Link to={item.url} style={{textDecoration: 'none'}}>
                         <Card boxShadow="base" cursor="pointer">
                         <Image src={item.image} alt={item.title} />
                         <Box p={4}>
