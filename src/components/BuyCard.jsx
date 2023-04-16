@@ -1,13 +1,15 @@
 import { Flex, Stack, Heading, Card, Image, CardBody, Text, CardFooter, Button } from "@chakra-ui/react";
-import { memoryHook } from "../hooks/memoryHook";
+
 
 export function PaqueteCard(props){
-    const {paquete} = props;
+    const {paquete, onBuy, onCart, onRemove} = props;
 
-    const [packages, addPackages] = memoryHook();
+    function handlebuy (){
+      onBuy(paquete);
+    }
 
-    function handleBuy(){
-      addPackages(paquete);
+    function handleRemove(){
+      onRemove(paquete)
     }
 
     return(
@@ -19,9 +21,11 @@ export function PaqueteCard(props){
                   <Text py='2'>{paquete.description}</Text>
                 </CardBody>
                 <CardFooter>
-                  <Button variant='solid' colorScheme='blue' onClick={handleBuy}>
+                  <Button variant='solid' colorScheme='blue' onClick={handlebuy}>
                     Buy for ${paquete.price}
                   </Button>
+                  {}
+                  <Button display={onCart ? "block" : "none"} onClick={handleRemove}>Eliminar</Button>
                 </CardFooter>
               </Stack>
             </Card>

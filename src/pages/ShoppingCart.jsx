@@ -1,6 +1,9 @@
-import { useMediaQuery, Flex, Heading, Card, Image, Text, Stack, CardBody, CardFooter, Button, Box, SimpleGrid  } from '@chakra-ui/react'
+import { useMediaQuery, Flex, Heading, Card, Image, Text, Stack, CardBody, CardFooter, Button, Box, SimpleGrid, IconButton  } from '@chakra-ui/react'
+import { Usuario } from '../components/usuario';
+import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useEffect } from "react";
 import { PaqueteCard } from '../components/BuyCard';
+import { memoryHook } from '../hooks/memoryHook';
 
 const items = [
     {
@@ -33,27 +36,41 @@ const items = [
     }
   ];
 
-  const totalPrice = items.reduce((acc, item) => acc + parseInt(item.price), 0);
+  
 
   
 
 function ShoppingCart(){
+    
+    const [packages, addPackages, removePackage] = memoryHook();
 
     const [isLargerThanMd] = useMediaQuery("(min-width: 10vw)");
+
+    function onRemove(item){
+        removePackage(item)    
+      }
 
     useEffect(() => {
         window.scrollTo(0, 0);
       }, []);
+      const handleBack=()=>{
+        window.history.back()
+      }
+    const totalPrice = packages.reduce((acc, item) => acc + parseInt(item.price), 0);
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
-            <Flex  alignSelf={"center"}>
-                <Heading>CARRITO DE COMPRAS</Heading>
-            </Flex>
+            <SimpleGrid column={3} alignItems={"center"} width={"100%"} >
+            <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
+                <Heading gridColumn={"2"} textAlign={"center"}>CARRITO DE COMPRAS</Heading>
+            <Box gridColumn={"3"} justifySelf={"end"} mr={10}>
+                <Usuario/>
+            </Box>
+            </SimpleGrid>
             <div style={{ display: 'flex', width: '100%', marginTop: "2em" }}>
                 <Box style={{ flex: '0 0 65%', marginRight: '1em', marginLeft: '2em'  }}>
                     <Stack spacing={4}>
-                        {items.map((item) => (
-                            <PaqueteCard paquete={item}/>
+                        {packages.map((item) => (
+                            <PaqueteCard paquete={item} onCart={true} onRemove={onRemove}/>
                         ))}
                     </Stack>
                 </Box>
