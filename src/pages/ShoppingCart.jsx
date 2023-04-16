@@ -37,7 +37,7 @@ const items = [
 
 function ShoppingCart(){
 
-    const [isLargerThanMd] = useMediaQuery("(min-width: 800px)");
+    const [isLargerThanMd] = useMediaQuery("(min-width: 1640px)");
 
     return(
         <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
@@ -53,7 +53,7 @@ function ShoppingCart(){
                                     <Box>
                                         <Image
                                             objectFit="cover"
-                                            maxW={{ base: "100%", sm: "250px" }}
+                                            maxW={{ base: "100%", sm: "25em" }}
                                             src={item.image}
                                             alt="card image"
                                         />
@@ -61,7 +61,7 @@ function ShoppingCart(){
                                     <Box>
                                         <Stack>
                                         <CardBody>
-                                            <Heading size="sm">{item.title}</Heading>
+                                            <Heading size="sm" maxW={{ base: "100%", sm: "25em" }}>{item.title}</Heading>
                                             <Text py="2">{item.description}</Text>
                                         </CardBody>
                                         <CardFooter>
