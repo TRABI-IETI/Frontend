@@ -1,5 +1,5 @@
 import { Carousel } from 'react-responsive-carousel';
-import { Flex, Heading, Card, Box, Image, Text , WrapItem, Avatar } from '@chakra-ui/react'
+import { Flex, Heading, Card, Box, Image, Text , WrapItem, Avatar, Divider, SimpleGrid, Link } from '@chakra-ui/react'
 // import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -36,6 +36,27 @@ const items = [
     }
   ];
 
+  const items2 = [
+    {
+      title: "PAQUETES",
+      description: "Description for card 1.",
+      image: "https://via.placeholder.com/150",
+      url: "/Paquetes",
+    },
+    {
+      title: "LUGARES",
+      description: "Description for card 2.",
+      image: "https://via.placeholder.com/150",
+      url: "/Lugares",
+    },
+    {
+      title: "MIS TRABI",
+      description: "Description for card 3.",
+      image: "https://via.placeholder.com/150",
+      url: "/Mistrabi",
+    },
+  ];
+
 function Home() {
   
   
@@ -64,9 +85,26 @@ function Home() {
             ))}
           </Carousel>
         </Box>
-        <Flex>
-            
+        <Divider/>
+        <Flex mt={"7"}>
+            <SimpleGrid columns={[1, 2, 3]} spacing="15em">
+                {items2.map((item) => (
+                    <Box key={item.title}>
+                    <Link to={item.url} style={"text-decoration: none"}>
+                        <Card boxShadow="base" cursor="pointer">
+                        <Image src={item.image} alt={item.title} />
+                        <Box p={4}>
+                            <Heading size="md">{item.title}</Heading>
+                            <Text mt={4}>{item.description}</Text>
+                        </Box>
+                        </Card>
+                    </Link>
+                    </Box>
+                ))}
+            </SimpleGrid>
         </Flex>
+        <Divider/>
+
       </Flex>
     );
   }
