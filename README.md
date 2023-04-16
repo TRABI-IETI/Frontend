@@ -14,3 +14,6 @@
 
 * Página que muestra el carrito de compras con todos los lugares o paquetes que el usuario selecciono:
 ![image](https://user-images.githubusercontent.com/79550161/232339022-de5c8960-9c84-4e3b-96b4-48102551aee2.png)
+
+* Página en donde se añade un nuevo lugar:
+![image](https://user-images.githubusercontent.com/79550161/232344758-6b3afc82-671e-46c8-b4f9-8064524ffc19.png)
