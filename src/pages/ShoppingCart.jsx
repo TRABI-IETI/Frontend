@@ -1,4 +1,5 @@
 import { useMediaQuery, Flex, Heading, Card, Image, Text, Stack, CardBody, CardFooter, Button, Box  } from '@chakra-ui/react'
+import { useEffect } from "react";
 
 const items = [
     {
@@ -37,8 +38,11 @@ const items = [
 
 function ShoppingCart(){
 
-    const [isLargerThanMd] = useMediaQuery("(min-width: 800px)");
+    const [isLargerThanMd] = useMediaQuery("(min-width: 10vw)");
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
     return(
         <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
             <Flex  textAlign="center">

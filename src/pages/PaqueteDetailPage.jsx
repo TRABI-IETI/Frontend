@@ -1,5 +1,7 @@
 import React from 'react';
 import { Flex, SimpleGrid, Button, Text, Box, Card, Heading, Image} from "@chakra-ui/react"
+import { LugarCard } from '../components/LugarCard';
+import { useEffect } from "react";
 
 const items = [
     {
@@ -34,7 +36,10 @@ const items = [
     }
   ];
 
-function LugarDetailPage(){
+function PaqueteDetailPage(){
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
             <SimpleGrid columns={[1,2,3]} spacing={{ base: '1em', md: '2em', lg: '3em' }} width="100%">
@@ -46,15 +51,7 @@ function LugarDetailPage(){
             <div style={{ display: 'flex', width: '100%', marginTop: "2em" }}>
                 <div style={{ flex: '0 0 65%', marginRight: '1em', marginLeft: '2em'  }}>
                 {items.map((item) => (
-                    <Card key={item.title} overflow="hidden" variant="outline" mt="3">
-                        <Box style={{ display: 'flex', flexDirection: 'row' }} key={item.title} p={4}>
-                                <Image src={item.image} alt={item.title}  width="50%" height="50%"/>
-                                <Box p={4}>
-                                    <Heading size="md">{item.title}</Heading>
-                                    <Text mt={4}>{item.description}</Text>
-                                </Box>
-                        </Box>
-                    </Card>
+                   <LugarCard lugar={item}/>
                 ))}
                 </div>
 
@@ -75,4 +72,4 @@ function LugarDetailPage(){
     );
 };
 
-export default LugarDetailPage
+export default PaqueteDetailPage

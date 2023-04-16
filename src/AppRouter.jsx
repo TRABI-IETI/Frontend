@@ -2,7 +2,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import ShoppingCart from './pages/ShoppingCart'
 import Paquetes from './pages/Paquetes';
-import LugarDetailPage from './pages/LugarDetailPage';
+import PaqueteDetailPage from './pages/PaqueteDetailPage';
+import Lugares from './pages/Lugares';
 
 export function AppRouter(){
     return (
@@ -17,7 +18,10 @@ export function AppRouter(){
             <Route path="/paquetes" element={<Paquetes />} />
           </Routes>
           <Routes>
-            <Route path="/descripcionLugar" element={<LugarDetailPage />} />
+            <Route path="/lugares" element={<Lugares />} />
+          </Routes>
+          <Routes>
+            <Route path="/descripcionLugar" element={<PaqueteDetailPage />} />
           </Routes>
         </BrowserRouter>
       );

@@ -1,4 +1,5 @@
 import { Flex, Stack, Heading, Card, Image, CardBody, Text, CardFooter, Button} from "@chakra-ui/react";
+import { LugarCard } from "../components/LugarCard";
 import { PaqueteCard } from "../components/BuyCard";
 import { useEffect } from "react";
 
@@ -45,16 +46,16 @@ const items = [
     }
   ];
 
-function Paquetes() {
+function Lugares() {
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-  
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        }, []);
+
   return (
     <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
         <Flex justifyContent="center" alignItems="center" mb={4} flexDirection="row" mt="4">
-            <Heading>PAQUETES</Heading>
+            <Heading>LUGARES</Heading>
         </Flex>
         <Flex justifyContent="space-between" alignItems="center">
           <Stack spacing={3}>
@@ -67,4 +68,4 @@ function Paquetes() {
   );
 }
 
-export default Paquetes
+export default Lugares

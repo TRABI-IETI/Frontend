@@ -1,8 +1,10 @@
 import { Carousel } from 'react-responsive-carousel';
 import { Flex, Heading, Card, Box, Image, Text , Divider, IconButton, SimpleGrid, HStack, Button, WrapItem, Avatar, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-import { FaFacebook, FaTwitter, FaWhatsapp, FaEllipsisV  } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaWhatsapp, FaEllipsisV, FaShoppingCart  } from 'react-icons/fa';
+import ShoppingCart from './ShoppingCart';
+
 
 const items = [
     {
@@ -42,24 +44,27 @@ const items = [
       title: "PAQUETES",
       description: "Revisa todos los paquetes que tenemos para ti, con los mejores precios y los mejores lugares.",
       image: "https://elviajerofeliz.com/wp-content/uploads/2022/09/Mejor-Sitio-Web-de-Paquetes-de-Viaje.jpg",
-      url: "/Paquetes",
+      url: "/paquetes",
     },
     {
       title: "LUGARES",
       description: "Cada lugar es unico y hay muchas posibilidades para diferentes gustos, revisa el que mas te guste y añadelo a tu trabi.",
       image: "https://static.wixstatic.com/media/b37859_ed70c3b57781436788724024d73a4102~mv2.jpg/v1/fill/w_640,h_356,al_c,q_80,usm_0.66_1.00_0.01,enc_auto/b37859_ed70c3b57781436788724024d73a4102~mv2.jpg",
-      url: "/Lugares",
+      url: "/lugares",
     },
     {
       title: "MIS TRABI",
       description: "Tus trabis te esperan con muchas experiencias y aventuras. Mira lo que has comprado para que no se te escape nada.",
       image: "https://ecdn.teacherspayteachers.com/thumbitem/Mis-Viajes-My-Travels-Review-Quiz-3059608-1603366401/original-3059608-1.jpg",
-      url: "/Mistrabi",
+      url: "/misTrabi",
     },
   ];
 
 function Home() {
-  
+  const navigate = useNavigate()
+  const handleShoppingCart = ()=>{
+    navigate("./ShoppingCart")
+  }
   
     return (
       <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
@@ -67,6 +72,8 @@ function Home() {
             <Box></Box>
             <Heading gridColumn={"2"} textAlign={"center"}>TRABI</Heading>
         <Box gridColumn={"3"} justifySelf={"end"} mr={10}>
+            <Button colorScheme='black' leftIcon={<FaShoppingCart />} variant={"ghost"} mr={2} onClick={handleShoppingCart}>        
+            </Button>
             <Menu>
                 <MenuButton as={Avatar} name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size="md" />
                 <MenuList>
