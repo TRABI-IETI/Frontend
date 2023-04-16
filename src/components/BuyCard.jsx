@@ -8,10 +8,6 @@ export function PaqueteCard(props){
       onBuy(paquete);
     }
 
-    function handleRemove(){
-      onRemove(paquete)
-    }
-
     return(
         <Card direction={{ base: 'column', sm: 'row' }} overflow='hidden' variant='outline' style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }}>
                 <Image objectFit='cover' maxW={{ base: '100%', sm: '200px' }} src={paquete.image} alt={paquete.title}/>
@@ -25,7 +21,7 @@ export function PaqueteCard(props){
                     Buy for ${paquete.price}
                   </Button>
                   {}
-                  <Button display={onCart ? "block" : "none"} onClick={handleRemove}>Eliminar</Button>
+                  <Button display={onCart ? "block" : "none"} onClick={onRemove}>Eliminar</Button>
                 </CardFooter>
               </Stack>
             </Card>

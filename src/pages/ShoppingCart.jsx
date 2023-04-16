@@ -46,8 +46,8 @@ function ShoppingCart(){
 
     const [isLargerThanMd] = useMediaQuery("(min-width: 10vw)");
 
-    function onRemove(item){
-        removePackage(item)    
+    function onRemove(index){
+        removePackage(index)    
       }
 
     useEffect(() => {
@@ -69,8 +69,8 @@ function ShoppingCart(){
             <div style={{ display: 'flex', width: '100%', marginTop: "2em" }}>
                 <Box style={{ flex: '0 0 65%', marginRight: '1em', marginLeft: '2em'  }}>
                     <Stack spacing={4}>
-                        {packages.map((item) => (
-                            <PaqueteCard paquete={item} onCart={true} onRemove={onRemove}/>
+                        {packages.map((item, index) => (
+                            <PaqueteCard key={index} paquete={item} onCart={true} onRemove={() => onRemove(index)}/>
                         ))}
                     </Stack>
                 </Box>
