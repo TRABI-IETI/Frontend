@@ -1,8 +1,8 @@
 import { Carousel } from 'react-responsive-carousel';
-import { Flex, Heading, Card, Box, Image, Text , WrapItem, Avatar, Divider, SimpleGrid, Link } from '@chakra-ui/react'
-// import { Link } from "react-router-dom";
-// import { Avatar, AvatarBadge, AvatarGroup } from '@chakra-ui/react'
+import { Flex, Heading, Card, Box, Image, Text , Divider, IconButton, SimpleGrid, HStack, Button, WrapItem, Avatar, Menu, MenuButton, MenuList, MenuItem } from '@chakra-ui/react'
+import { Link } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { FaFacebook, FaTwitter, FaWhatsapp, FaEllipsisV  } from 'react-icons/fa';
 
 const items = [
     {
@@ -63,16 +63,21 @@ function Home() {
   
     return (
       <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
-        <Flex justifyContent="center" alignItems="center" mb={4} flexDirection="row" >
-            <Heading>TRABI</Heading>
-        {/* </Flex> */}
-        {/* <Flex justifyContent={"flex-end"} flexDirection="row"> */}
-            {/* <WrapItem>
-                <Avatar name='Dan Abrahmov' src='https://bit.ly/dan-abramov' />
-            </WrapItem> */}
-        </Flex>
-        <Box height={"30em"} width={"30em"} mx="auto" >
-          <Carousel showThumbs={false} showArrows={true} infiniteLoop autoPlay interval={3000} >
+        <SimpleGrid column={3} alignItems={"center"} width={"100%"} >
+            <Box></Box>
+            <Heading gridColumn={"2"} textAlign={"center"}>TRABI</Heading>
+        <Box gridColumn={"3"} justifySelf={"end"} mr={10}>
+            <Menu>
+                <MenuButton as={Avatar} name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size="md" />
+                <MenuList>
+                    <MenuItem>Perfil</MenuItem>
+                    <MenuItem>Cerrar sesión</MenuItem>
+                </MenuList>
+            </Menu>
+        </Box>
+        </SimpleGrid>
+        <Box maxWidth={{base: "90%", md: "80%", lg: "60%"}} mx="auto" mb={7}>
+          <Carousel showThumbs={false} showStatus={false} showArrows={true} infiniteLoop autoPlay interval={3000}>
             {items.map((item) => (
               <Box key={item.title} p={4}>
                 <Card boxShadow="base">
@@ -87,10 +92,10 @@ function Home() {
           </Carousel>
         </Box>
         <Divider/>
-        <Flex mt={"7"}>
-            <SimpleGrid columns={[1, 2, 3]} spacing="7em" mr={"10"} ml={"10"}>
+        <Flex mt={"7"} mb={7}>
+            <SimpleGrid columns={[1, null, 3]} spacing="7em" mr={"10"} ml={"10"}>
                 {items2.map((item) => (
-                    <Box key={item.title}>
+                    <Box key={item.title} minWidth={{ base: '100%', md: '400px', lg: '200px' }}>
                     <Link to={item.url} style={{textDecoration: 'none'}}>
                         <Card boxShadow="base" cursor="pointer">
                         <Image src={item.image} alt={item.title} height="200px" objectFit="cover"/>
@@ -105,9 +110,28 @@ function Home() {
             </SimpleGrid>
         </Flex>
         <Divider/>
-        <Flex mt={7}>
-            <Heading>SOBRE NOSOTROS</Heading>
-            
+        <Flex mt={7} justifyContent= "center" alignItems= "center" flexDirection="column" mb={10}>
+            <Card boxShadow="base" maxWidth="50em" mx="auto" textAlign="center">
+                <Heading mb={3} mt={5}>SOBRE NOSOTROS</Heading>
+                <Text mr={10} ml={10} textAlign={"justify"} mb={10}>Somos una empresa enfocada en que nuestros clientes conozcan los lugares mas significativos de colombia, empezando por parques, lugares historicos, museos y restaurantes.
+                    Te ayudamos a organizar tu viaje, generandote un intinerario o dejandote en la libertad de decidir que te gusta y que quieres conocer. Con nosotros puedes ahorrarte filas y lo
+                    mas importante, tu dinero.
+                    <br/>
+                    De igual modo estamos apoyando a las empresas pequeñas para que puedan publicar sus productos en nuestro feed. Queremos que pases las mejores experiencias en tus viajes y
+                    que crezcamos juntos
+                </Text>
+            <HStack justifyContent="center" mb={7}>
+                <Button colorScheme='facebook' leftIcon={<FaFacebook />}>
+                    Facebook
+                </Button>
+                <Button colorScheme='twitter' leftIcon={<FaTwitter />}>
+                    Twitter
+                </Button>
+                <Button colorScheme='whatsapp' leftIcon={<FaWhatsapp />}>
+                    Whatsapp
+                </Button>
+            </HStack>
+            </Card>
         </Flex>
       </Flex>
     );
