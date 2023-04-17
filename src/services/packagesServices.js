@@ -71,5 +71,20 @@ export async function updatePackage(packageId, newPackage){
 }
 
     
-
-
+export async function deletePlaceToPackage(packageId, place){
+  const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+  const response = await fetch("http://localhost:8081/v1/packages/"+packageId+"/"+place, options);
+  if (response.ok) {
+  const jsonResponse = await response.json();
+  console.log(jsonResponse);
+  return jsonResponse;
+  }else{
+      const errorReason = await response.json()
+      return errorReason;
+  }
+};

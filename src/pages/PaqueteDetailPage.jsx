@@ -5,7 +5,7 @@ import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useParams } from 'react-router';
 import { memoryHook } from "../hooks/memoryHook";
-import { getPackage } from '../services/packagesServices';
+import { deletePlaceToPackage, getPackage, updatePackage } from '../services/packagesServices';
 import { getPlace } from "../services/placesServices";
 
 const items = [
@@ -81,6 +81,17 @@ const items = [
       addPackages(paquete)
     }
 
+    function handleDeletePlace(place, placePrice){
+      var lugaresProv = (paquete.places)
+      lugaresProv = lugaresProv.filter(item => item !== place)
+      paquete.places = lugaresProv
+      paquete.price = parseFloat(paquete.price) - parseFloat(placePrice)
+      console.log(paquete)
+      updatePackage(paqueteId, paquete).then(data=>{
+        location.reload()
+      });
+    }
+
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
                 {/* <Text fontSize="30" fontWeight="bold"  justifySelf="center">{paquete.name}</Text> */}
@@ -89,7 +100,7 @@ const items = [
             <div style={{ display: 'flex', width: '100%', marginTop: "2em" }}>
                 <div style={{ flex: '0 0 65%', marginRight: '1em', marginLeft: '2em'  }}>
                 {lugares.map((item) => (
-                   <LugarCard lugar={item}/>
+                   <LugarCard lugar={item} idUser={paquete.idUsuario} onDeletePlace={handleDeletePlace} />
                 ))}
                 </div>
 
