@@ -70,6 +70,24 @@ export async function updatePackage(packageId, newPackage){
     }
 }
 
+export async function createTrabi(trabiName, trabiPackage){
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(trabiPackage)
+  };
+  const response = await fetch("http://localhost:8081/v1/packages/"+trabiName, options);
+    if (response.ok) {
+    const jsonResponse = await response.json();
+    return jsonResponse;
+    }else{
+        const errorReason = await response.json()
+        return errorReason;
+    }
+}
+
     
 
 

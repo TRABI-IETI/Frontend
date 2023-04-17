@@ -1,4 +1,5 @@
 import { Flex, Stack, Heading, SimpleGrid, Box, IconButton, Image, CardBody, Text, CardFooter, Button} from "@chakra-ui/react";
+import { AddIcon } from "@chakra-ui/icons";
 import { PaqueteCard } from "../components/PaqueteCard";
 import { useEffect, useState } from "react";
 import { Usuario } from '../components/usuario';
@@ -7,10 +8,21 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import getPackages from "../services/packagesServices";
 import { memoryHook } from "../hooks/memoryHook";
+import { CrearTrabi } from "../components/CrearTrabi";
 
 const idUsuario = "prueba"
 function MisTrabi() {
   const [memoPackages, addPackages, removePackage] = memoryHook();
+
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   const [packages, setPackages] = useState([]);
 
@@ -42,7 +54,12 @@ function MisTrabi() {
             ))}
           </Stack>
         </Flex>
+        <Box position="fixed" bottom={4} right={4}>
+          <IconButton icon={<AddIcon/>} onClick={handleOpen} />
+        </Box>
+        <CrearTrabi isOpen={isOpen} onClose={handleClose}></CrearTrabi>
       </Flex>
+      
   );
 }
 
