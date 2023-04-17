@@ -59,13 +59,9 @@ function ShoppingCart(){
     const totalPrice = packages.reduce((acc, item) => acc + parseInt(item.price), 0);
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
-            <SimpleGrid column={3} alignItems={"center"} width={"100%"} >
-            <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
-                <Heading gridColumn={"2"} textAlign={"center"}>CARRITO DE COMPRAS</Heading>
-            <Box gridColumn={"3"} justifySelf={"end"} mr={10}>
                 <Usuario/>
-            </Box>
-            </SimpleGrid>
+                <Heading textAlign={"center"}>CARRITO DE COMPRAS</Heading>
+
             <div style={{ display: 'flex', width: '100%', marginTop: "2em" }}>
                 <Box style={{ flex: '0 0 65%', marginRight: '1em', marginLeft: '2em'  }}>
                     <Stack spacing={4}>
