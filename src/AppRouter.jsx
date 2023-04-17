@@ -4,6 +4,7 @@ import ShoppingCart from './pages/ShoppingCart'
 import Paquetes from './pages/Paquetes';
 import PaqueteDetailPage from './pages/PaqueteDetailPage';
 import Lugares from './pages/Lugares';
+import NewLugar from './pages/NewLugar';
 
 export function AppRouter(){
     return (
@@ -22,6 +23,9 @@ export function AppRouter(){
           </Routes>
           <Routes>
             <Route path="/descripcionLugar" element={<PaqueteDetailPage />} />
+          </Routes>
+          <Routes>
+            <Route path="/newLugar" element={<NewLugar />} />
           </Routes>
         </BrowserRouter>
       );
