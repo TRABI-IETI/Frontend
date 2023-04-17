@@ -8,9 +8,10 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import getPackages from "../services/packagesServices";
 import { memoryHook } from "../hooks/memoryHook";
+import { BotonScrollTop } from "../components/BotonScrollTop";
 import { CrearTrabi } from "../components/CrearTrabi";
 
-const idUsuario = "prueba"
+const idUsuario = JSON.parse(localStorage.getItem("usuarioCookie")).id
 function MisTrabi() {
   const [memoPackages, addPackages, removePackage] = memoryHook();
 
@@ -58,6 +59,7 @@ function MisTrabi() {
           <IconButton icon={<AddIcon/>} onClick={handleOpen} />
         </Box>
         <CrearTrabi isOpen={isOpen} onClose={handleClose}></CrearTrabi>
+        <BotonScrollTop/>
       </Flex>
       
   );

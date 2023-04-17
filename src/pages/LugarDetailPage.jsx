@@ -6,9 +6,10 @@ import { Usuario } from '../components/usuario';
 import { ArrowBackIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { useParams } from 'react-router';
 import { getPlace } from '../services/placesServices';
-import getPackages, { addPlaceToPackage } from '../services/packagesServices';
+import getPackages, { addPlaceToPackage, updatePackage } from '../services/packagesServices';
+import { BotonScrollTop } from '../components/BotonScrollTop';
 
-const idUsuario = "prueba"
+const idUsuario = JSON.parse(localStorage.getItem("usuarioCookie")).id
 
 export default function LugarDetailPage(){
 
@@ -27,7 +28,13 @@ export default function LugarDetailPage(){
   }
 
   const handleAddToPackage=(packagId)=>{
-    addPlaceToPackage(packagId, lugarId);
+    packages.map((package2) => {
+        if(package2.id === packagId){
+            package2.price = parseFloat(package2.price) + parseFloat(lugar.price)
+            package2.places = [...package2.places, lugarId]
+            updatePackage(packagId, package2)
+        }
+    })
   }
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
@@ -75,6 +82,7 @@ export default function LugarDetailPage(){
                     </Stack>
                 </Box>
             </div>
+            <BotonScrollTop/>
         </Flex>
     );
 };

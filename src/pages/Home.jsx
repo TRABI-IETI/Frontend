@@ -4,7 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { FaFacebook, FaTwitter, FaWhatsapp, FaEllipsisV, FaShoppingCart  } from 'react-icons/fa';
 import { Usuario } from '../components/usuario';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { ArrowUpIcon } from '@chakra-ui/icons';
+import { BotonScrollTop } from '../components/BotonScrollTop';
+import getPackages from '../services/packagesServices';
+import { PaqueteCard } from '../components/PaqueteCard';
+import { usePlaceHook } from '../hooks/usePlaceHook';
 
 const items = [
     {
@@ -62,39 +67,29 @@ const items = [
 
 function Home() {
   const [currentImage, setCurrentImage] = useState(items[0].image);
-  // const styles = {
-  //   root: {
-  //     position: 'relative',
-  //     '::before': {
-  //       content: '""',
-  //       position: 'absolute',
-  //       top: 0,
-  //       left: 0,
-  //       width: '100%',
-  //       height: '100%',
-  //       zIndex: -1,
-  //       backgroundSize: 'cover',
-  //       backgroundPosition: 'center',
-  //       filter: 'blur(10px)',
-  //       backgroundImage: `url(${currentImage})`,
-  //     },
-  //   },
-  // };
-  // const handleSlideChange = (index) => {
-  //   setCurrentImage(index);
-  // };
-  // const blurImage = blurDataUrl(items[currentImage].image, 20, 10);
-
-  // const handleImageLoad = (event) => {
-  //   event.target.style.filter = "blur(10px)";
-  // };
   const handleImageChange = (newIndex) => {
     setCurrentImage(items[newIndex].image);
   };
+
+  const [packages, setPackages] = useState([]);
+  const [lugarImagen,setLugarImage] = useState([]);
+
+  const {getImagePlace, lugares} = usePlaceHook()
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    getPackages({"idUsuario": null}).then((paquetes) => {
+      setPackages(paquetes) 
+      console.log(paquetes)
+      paquetes.map((value =>getImagePlace(value)))
+      
+    });
+    console.log(lugares)
+  }, []);
   
     return (
       <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
             <Usuario/>
+            <button onClick={()=>console.log(lugares)}>hola</button>
             <Heading textAlign={"center"}>TRABI</Heading>
         <Box
       position="relative"
@@ -102,20 +97,23 @@ function Home() {
       backgroundSize="cover"
       backgroundPosition="center"
       mt={7}
-      // filter="blur(5px)"
+      mb={3}
     >
         <Box maxWidth={{base: "90%", md: "80%", lg: "60%"}} mx="auto" mb={7} overflow={"hidden"} zIndex={"1"}>
           <Carousel onChange={handleImageChange}
           showThumbs={false} showStatus={false} showArrows={false} infiniteLoop autoPlay interval={3000}>
-            {items.map((item) => (
-              <Box key={item.title} p={4}>
+            {packages.map((item) => (
+              <Box key={item.name} p={4}>
+                <Link to={`/descripcionPaquete/${item.id}`} style={{textDecoration: 'none'}}>
                 <Card boxShadow="20px 20px 80px rgba(0, 0, 0, 0.2)"  borderRadius="md" p={7}>
-                  <Image src={item.image} alt={item.title}/>
+                  <Image src={lugares[0].imagen} alt={item.name}/>
                   <Box p={4}>
-                    <Heading size="md">{item.title}</Heading>
+                    <Heading size="md">{item.name}</Heading>
                     <Text mt={4}>{item.description}</Text>
                   </Box>
                 </Card>
+                {/* <PaqueteCard paquete={item}/> */}
+                </Link>
               </Box>
             ))}
           </Carousel>
@@ -163,6 +161,7 @@ function Home() {
             </HStack>
             </Card>
         </Flex>
+        <BotonScrollTop/>
       </Flex>
     );
   }
