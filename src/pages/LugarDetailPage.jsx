@@ -7,6 +7,7 @@ import { ArrowBackIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { useParams } from 'react-router';
 import { getPlace } from '../services/placesServices';
 import getPackages, { addPlaceToPackage, updatePackage } from '../services/packagesServices';
+import { BotonScrollTop } from '../components/BotonScrollTop';
 
 const idUsuario = JSON.parse(localStorage.getItem("usuarioCookie")).id
 
@@ -81,6 +82,7 @@ export default function LugarDetailPage(){
                     </Stack>
                 </Box>
             </div>
+            <BotonScrollTop/>
         </Flex>
     );
 };
