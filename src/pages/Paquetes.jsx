@@ -5,6 +5,7 @@ import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { memoryHook } from "../hooks/memoryHook";
 
 const items = [
     {
@@ -50,6 +51,7 @@ const items = [
   ];
 
 function Paquetes() {
+  const [packages, addPackages, removePackage] = memoryHook();
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -59,6 +61,11 @@ function Paquetes() {
   const handleBack=()=>{
     window.history.back()
   }
+
+  function onBuy(item){
+    addPackages(item)
+  }
+
   
 
   return (
@@ -74,7 +81,7 @@ function Paquetes() {
           <Stack spacing={3}>
             {items.map((item) => (
               <Link to={`/descripcionPaquete/${item.title}`} style={{textDecoration: 'none'}}>
-                <PaqueteCard paquete={item}/>
+                <PaqueteCard paquete={item} onBuy={onBuy}/>
               </Link>
             ))}
           </Stack>

@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useParams } from 'react-router';
+import { memoryHook } from "../hooks/memoryHook";
 
 const items = [
     {
@@ -39,8 +40,22 @@ const items = [
     }
   ];
 
+  const paquete = {
+    image:
+        "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
+      id: 5,
+      title: 'Paquete 5',
+      price: '1000',  
+      description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
+  }
+
 function PaqueteDetailPage(){
+
+  
+  const [packages, addPackages, removePackage] = memoryHook();
+
   const {paqueteId} = useParams();
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -48,6 +63,11 @@ function PaqueteDetailPage(){
   const handleBack=()=>{
     window.history.back()
   }
+
+  function handleAdd(item){
+    addPackages(paquete)
+  }
+
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
             <SimpleGrid columns={[1,2,3]} spacing={{ base: '1em', md: '2em', lg: '3em' }} width="100%">
@@ -73,7 +93,7 @@ function PaqueteDetailPage(){
                             Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
                         </Text>
                     </Card>
-                    <Button bg="#f5d494" mt={4}>Comprar Paquete</Button>
+                    <Button bg="#f5d494" mt={4} onClick={handleAdd}>Comprar Paquete</Button>
                 </div>
             </div>
         </Flex>
