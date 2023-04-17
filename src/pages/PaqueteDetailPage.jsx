@@ -46,6 +46,7 @@ const items = [
     const [paquete, setPaquete] = useState({});
     const [lugares, setLugares] = useState([]);
     const [memoPackages, addPackages, removePackage] = memoryHook();
+    const totalPrice = lugares.reduce((acc, item) => acc + parseInt(item.price), 0);
   
     function mapToPlace(places){
       const altPromise = places.map((data)=>getPlace(data).then(value=>value))
@@ -56,6 +57,7 @@ const items = [
       const promises = mapToPlace(places);
       const data = await Promise.all(promises);
       setLugares(data)
+      
     }
   
     function fetchPaquete() {
@@ -101,7 +103,7 @@ const items = [
                             <br/>
                             Duración apróximada: {paquete.duration}
                             <br/>
-                            Precio: {paquete.price}
+                            Precio: {totalPrice}
                         </Text>
                     </Card>
                     <Button bg="#f5d494" mt={4} onClick={handleAdd}>Comprar Paquete</Button>

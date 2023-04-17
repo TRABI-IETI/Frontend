@@ -35,7 +35,6 @@ export function getPackage(packagesOne) {
 };
 
 export async function addPlaceToPackage(packageId, place){
-    console.log(packageId);
     const options = {
         method: 'POST',
         headers: {
@@ -52,3 +51,21 @@ export async function addPlaceToPackage(packageId, place){
         return errorReason;
     }
 };
+
+export async function updatePackage(packageId, newPackage){
+    const options = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+    const response = await fetch("http://localhost:8081/v1/packages/"+packageId+"/"+place, options);
+    if (response.ok) {
+    const jsonResponse = await response.json();
+    console.log(jsonResponse);
+    return jsonResponse;
+    }else{
+        const errorReason = await response.json()
+        return errorReason;
+    }
+}
