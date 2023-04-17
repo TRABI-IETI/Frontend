@@ -40,38 +40,71 @@ const items = [
     }
   ];
 
-function PaqueteDetailPage(){
-  const {paqueteId} = useParams();
-  const [paquete, setPaquete] = useState({});
-  const [lugares, setLugares] = useState([]);
-
-  function mapToPlaceJSON (places){
-    var newPlaces = {}
-    places.map((place) => {
-      console.log(place)
-      getPlace(place).then((lugar) => {
-        newPlaces = [...lugares, lugar];
-        setLugares(newPlaces);
+  function PaqueteDetailPage(){
+    const {paqueteId} = useParams();
+    const [paquete, setPaquete] = useState({});
+    const [lugares, setLugares] = useState([]);
+  
+    function mapToPlace(places){
+      const altPromise = places.map((data)=>getPromisePlaces(data).then(value=>value))
+      return altPromise;
+    }
+  
+    async function getLugares(places){
+      const promises = mapToPlace(places);
+      const data = await Promise.all(promises);
+      setLugares(data)
+    }
+  
+    function fetchPaquete() {
+      window.scrollTo(0, 0);
+      getPromise(paqueteId).then(data=>getLugares(data.places));
+    }
+  
+    function getPromisePlaces(place) {
+      return new Promise((resolve, reject) => {
+        fetch("http://localhost:8082/v1/places/"+place, {
+        }).then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            reject(
+              "No hemos podido recuperar ese json. El código de respuesta del servidor es: " + response.status
+            );
+          })
+          .then((json) => resolve(json))
+          .catch((err) => reject(err));
       });
-    })
-  }
-
-  async function fetchPaquete() {
-    window.scrollTo(0, 0);
-    const paquete = await getPackage(paqueteId);
-    setPaquete(paquete);
-  }
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    fetchPaquete()
-  }, []);
-
-  const handleBack=()=>{
-    window.history.back()
-  }
+    }
+  
+    function getPromise(packagesOne) {
+      return new Promise((resolve, reject) => {
+        fetch("http://localhost:8081/v1/packages/"+packagesOne, {
+        }).then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
+            reject(
+              "No hemos podido recuperar ese json. El código de respuesta del servidor es: " + response.status
+            );
+          })
+          .then((json) => resolve(json))
+          .catch((err) => reject(err));
+      });
+    }
+  
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      fetchPaquete()
+    }, []);
+  
+    const handleBack=()=>{
+      window.history.back()
+    }
 
     return(
+      <div>
+        {/* {paquete ? ( */}
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
             <SimpleGrid columns={[1,2,3]} spacing={{ base: '1em', md: '2em', lg: '3em' }} width="100%">
             <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
@@ -100,6 +133,11 @@ function PaqueteDetailPage(){
                 </div>
             </div>
         </Flex>
+        {/* ) : (
+          // Renderizar un mensaje de carga mientras se obtienen los datos
+          <p>Cargando...</p>
+        )} */}
+        </div>
     );
 };
 

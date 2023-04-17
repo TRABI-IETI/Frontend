@@ -14,10 +14,19 @@ export default async function getPackages(filters) {
       );
 };
 
-export async function getPackage(packagesOne) {
-    return await(
-        await fetch(
-            "http://localhost:8081/v1/packages/"+packagesOne
-            )
-    ).json();
+export function getPackage(packagesOne) {
+    return new Promise(async (resolve, reject) => {
+        try {
+          const response = await fetch("http://localhost:8081/v1/packages/" + packagesOne);
+          const data = await response.json();
+          resolve(data);
+        } catch (error) {
+          reject(error);
+        }
+      });
+    // return await(
+    //     await fetch(
+    //         "http://localhost:8081/v1/packages/"+packagesOne
+    //         )
+    // ).json();
 };
