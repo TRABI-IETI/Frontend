@@ -1,9 +1,12 @@
-import React from 'react';
 import { Flex, SimpleGrid, Button, Text, Box, Card, Heading, Image, IconButton} from "@chakra-ui/react"
 import { LugarCard } from '../components/LugarCard';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
+import { useParams } from 'react-router';
+import { memoryHook } from "../hooks/memoryHook";
+import { getPackage } from '../services/packagesServices';
+import { getPlace } from "../services/placesServices";
 
 const items = [
     {
@@ -38,40 +41,70 @@ const items = [
     }
   ];
 
-function PaqueteDetailPage(){
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+  function PaqueteDetailPage(){
+    const {paqueteId} = useParams();
+    const [paquete, setPaquete] = useState({});
+    const [lugares, setLugares] = useState([]);
+    const [memoPackages, addPackages, removePackage] = memoryHook();
+  
+    function mapToPlace(places){
+      const altPromise = places.map((data)=>getPlace(data).then(value=>value))
+      return altPromise;
+    }
+  
+    async function getLugares(places){
+      const promises = mapToPlace(places);
+      const data = await Promise.all(promises);
+      setLugares(data)
+    }
+  
+    function fetchPaquete() {
+      window.scrollTo(0, 0);
+      getPackage(paqueteId).then(data=>{
+        setPaquete(data);
+        getLugares(data.places)
+      });
+    }
+  
+    useEffect(() => {
+      window.scrollTo(0, 0);
+      fetchPaquete()
+    }, []);
+  
+    const handleBack=()=>{
+      window.history.back()
+    }
 
-  const handleBack=()=>{
-    window.history.back()
-  }
+    function handleAdd(){
+      addPackages(paquete)
+    }
+
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
             <SimpleGrid columns={[1,2,3]} spacing={{ base: '1em', md: '2em', lg: '3em' }} width="100%">
             <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
-                <Text fontSize="30" fontWeight="bold"  justifySelf="center">NOMBRE PAQUETE</Text>
+                <Text fontSize="30" fontWeight="bold"  justifySelf="center">{paquete.name}</Text>
                 <Usuario/>
             </SimpleGrid>
 
             <div style={{ display: 'flex', width: '100%', marginTop: "2em" }}>
                 <div style={{ flex: '0 0 65%', marginRight: '1em', marginLeft: '2em'  }}>
-                {items.map((item) => (
+                {lugares.map((item) => (
                    <LugarCard lugar={item}/>
                 ))}
                 </div>
 
-                <div style={{ flex: '0 0 30%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>            
+                <div style={{ flex: '0 0 30%', maxWidth:'25vw', flexDirection: 'column', alignlugar: 'center'}}>            
                     <Card mt="3">
                         <Text ml={2}>
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Descripción: {paquete.description}
+                            <br/>
+                            Duración apróximada: {paquete.duration}
+                            <br/>
+                            Precio: {paquete.price}
                         </Text>
                     </Card>
-                    <Button bg="#f5d494" mt={4}>Comprar Paquete</Button>
+                    <Button bg="#f5d494" mt={4} onClick={handleAdd}>Comprar Paquete</Button>
                 </div>
             </div>
         </Flex>
