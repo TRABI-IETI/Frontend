@@ -8,8 +8,9 @@ import { Link } from "react-router-dom";
 import getPackages from "../services/packagesServices";
 import { memoryHook } from "../hooks/memoryHook";
 
-const idUsuario = JSON.parse(localStorage.getItem("usuarioCookie")).id
+
 function MisTrabi() {
+  const idUsuario = JSON.parse(localStorage.getItem("usuarioCookie")).id
   const [memoPackages, addPackages, removePackage] = memoryHook();
 
   const [packages, setPackages] = useState([]);
