@@ -1,4 +1,4 @@
-import { Button, Flex, Heading, Input, useColorMode, useColorModeValue } from "@chakra-ui/react"
+import { Button, Flex, Heading, Input, useColorMode, useColorModeValue, Text } from "@chakra-ui/react"
 import { useState, useEffect } from "react";
 import { getUser } from "../services/loginServices"
 import { useNavigate } from "react-router";
@@ -8,22 +8,29 @@ const Login=()=>{
     const formBackgroud = useColorModeValue("gray.100","gray.700")
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [formError, setFormError] = useState(false);
+    const [message, setMessage] = useState("");
     const navigate = useNavigate()
 
   const handleVerifyLogin = () => {
+
     getUser(email,password).then((usuario) => {
-        if(usuario !== null){
+        if(email === "" || password === ""){
+            setFormError(true);
+            setMessage("Los campos son obligatorios")
+        }
+        else if(usuario !== null){
+            setFormError(false);
             localStorage.setItem("usuarioCookie", JSON.stringify(usuario)) 
             navigate("/home")
+        }else{
+            setFormError(true);
+            setMessage("Correo o contraseña invalidos")
         }
     });
     setEmail("")
     setPassword("")
   };
-
-//   useEffect(() => {
-//     getUser(email,password).then((usuario) => console.log(usuario));
-//   }, [])
 
     return(
         <Flex height={"100vh"} alignItems={"center"} justifyContent={"center"}>
@@ -33,6 +40,10 @@ const Login=()=>{
                 <Input placeholder="password" variant={"filled"} mb={6} type="password" value={password} onChange={(e) => setPassword(e.target.value)}></Input>
                 <Button colorScheme="teal" onClick={handleVerifyLogin}>Log In</Button>
                 <Button onClick={toggleColorMode}>Dark Mode</Button>
+                {formError && (
+                    <Text color="red" mt={4}>
+                        {message}
+                    </Text>)}
             </Flex>
 
         </Flex>

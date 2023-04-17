@@ -6,8 +6,8 @@ import PaqueteDetailPage from './pages/PaqueteDetailPage';
 import LugarDetailPage from './pages/LugarDetailPage';
 import Lugares from './pages/Lugares';
 import MisTrabi from './pages/MisTrabi';
-
 import Login from './pages/Login';
+
 export function AppRouter(){
     return (
         <BrowserRouter>
