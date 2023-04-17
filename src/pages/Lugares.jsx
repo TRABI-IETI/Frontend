@@ -1,6 +1,6 @@
 import { Flex, Stack, Heading, SimpleGrid, Box, Card, Image, CardBody, Text, CardFooter, Button, IconButton} from "@chakra-ui/react";
 import { LugarCard } from "../components/LugarCard";
-import { PaqueteCard } from "../components/BuyCard";
+import { PaqueteCard } from "../components/LugarBuyCard";
 import { useEffect, useState } from "react";
 import getPlaces from "../services/placesServices";
 import { Usuario } from '../components/usuario';
@@ -75,7 +75,7 @@ function Lugares() {
         <Flex justifyContent="space-between" alignItems="center">
           <Stack spacing={3}>
             {lugares.map((item) => (
-              <Link to={`/descripcionLugar/${item.title}`} style={{textDecoration: 'none'}}>
+              <Link to={`/descripcionLugar/${item.name}`} style={{textDecoration: 'none'}}>
               <PaqueteCard paquete={item}/>
               </Link>
             ))}

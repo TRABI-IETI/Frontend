@@ -1,24 +1,11 @@
 import React from 'react';
 import { Flex, SimpleGrid, Button, Text, Box, Card, Heading, Image, IconButton, Stack, Menu, MenuList, MenuButton, MenuItem} from "@chakra-ui/react"
 import { LugarCard } from '../components/LugarCard';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Usuario } from '../components/usuario';
 import { ArrowBackIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { useParams } from 'react-router';
-
-const items = 
-    {
-      image:
-        "https://images.unsplash.com/photo-1546768292-fb12f6c92568?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
-        title: 'Card 1', 
-        price: '1000', 
-        address: '1000',
-        schedule: '1000',
-        phone:'144141',
-        restrictions:'restrictions',
-        description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    }
-
+import { getPlace } from '../services/placesServices';
 
 const packages = [
     {
@@ -42,9 +29,12 @@ const packages = [
 export default function LugarDetailPage(){
 
     const {lugarId} = useParams();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    const [lugar, setLugar] = useState({});
+
+    useEffect(() => {
+        window.scrollTo(0, 0);
+        getPlace(lugarId).then((lugar) => setLugar(lugar));
+      }, [])
 
   const handleBack=()=>{
     window.history.back()
@@ -59,21 +49,21 @@ export default function LugarDetailPage(){
 
             <div style={{ display: 'flex', width: '100%', marginTop: "2em" }}>
                 <div style={{ flex: '0 0 65%', marginRight: '1em', marginLeft: '2em'  }}>
-                   <LugarCard lugar={items}/>
+                   <LugarCard lugar={lugar}/>
                 </div>
 
-                <Box style={{ flex: '0 0 30%', maxWidth:'25vw', flexDirection: 'column', alignItems: 'center'}}>            
+                <Box style={{ flex: '0 0 30%', maxWidth:'25vw', flexDirection: 'column', alignlugar: 'center'}}>            
                     <Card mt="3">
                         <Text ml={2}>
-                            Horario: {items.schedule}
+                            Horario: {lugar.schedule}
                             <br/>
-                            Direccion: {items.address}
+                            Direccion: {lugar.address}
                             <br/>
-                            Precio: {items.price}
+                            Precio: {lugar.price}
                             <br/>
-                            Telefono: {items.phone}
+                            Telefono: {lugar.phone}
                             <br/>
-                            Restricciones: {items.restrictions}
+                            Restricciones: {lugar.restrictions}
                         </Text>
                     </Card>
                     <Stack spacing={4} direction='row' align='center' mt={4}>

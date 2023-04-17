@@ -1,10 +1,11 @@
 import { Flex, Stack, Heading, SimpleGrid, Box, IconButton, Image, CardBody, Text, CardFooter, Button} from "@chakra-ui/react";
-import { PaqueteCard } from "../components/BuyCard";
-import { useEffect } from "react";
+import { PaqueteCard } from "../components/PaqueteCard";
+import { useEffect, useState } from "react";
 import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import getPackages from "../services/packagesServices";
 
 const items = [
     {
@@ -51,9 +52,11 @@ const items = [
 
 function Paquetes() {
 
-  const navigate = useNavigate();
+  const [packages, setPackages] = useState([]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    getPackages({"idUsuario": null}).then((paquetes) => setPackages(paquetes));
   }, []);
 
   const handleBack=()=>{
@@ -72,8 +75,8 @@ function Paquetes() {
         </SimpleGrid>
         <Flex justifyContent="space-between" alignItems="center">
           <Stack spacing={3}>
-            {items.map((item) => (
-              <Link to={`/descripcionPaquete/${item.title}`} style={{textDecoration: 'none'}}>
+            {packages.map((item) => (
+              <Link to={`/descripcionPaquete/${item.id}`} style={{textDecoration: 'none'}}>
                 <PaqueteCard paquete={item}/>
               </Link>
             ))}

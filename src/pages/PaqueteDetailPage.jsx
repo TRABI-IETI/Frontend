@@ -1,10 +1,11 @@
-import React from 'react';
 import { Flex, SimpleGrid, Button, Text, Box, Card, Heading, Image, IconButton} from "@chakra-ui/react"
 import { LugarCard } from '../components/LugarCard';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useParams } from 'react-router';
+import { getPackage } from '../services/packagesServices';
+import { getPlace } from "../services/placesServices";
 
 const items = [
     {
@@ -41,24 +42,46 @@ const items = [
 
 function PaqueteDetailPage(){
   const {paqueteId} = useParams();
+  const [paquete, setPaquete] = useState({});
+  const [lugares, setLugares] = useState([]);
+
+  function mapToPlaceJSON (places){
+    var newPlaces = {}
+    places.map((place) => {
+      console.log(place)
+      getPlace(place).then((lugar) => {
+        newPlaces = [...lugares, lugar];
+        setLugares(newPlaces);
+      });
+    })
+  }
+
+  async function fetchPaquete() {
+    window.scrollTo(0, 0);
+    const paquete = await getPackage(paqueteId);
+    setPaquete(paquete);
+  }
+
   useEffect(() => {
     window.scrollTo(0, 0);
+    fetchPaquete()
   }, []);
 
   const handleBack=()=>{
     window.history.back()
   }
+
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
             <SimpleGrid columns={[1,2,3]} spacing={{ base: '1em', md: '2em', lg: '3em' }} width="100%">
             <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
-                <Text fontSize="30" fontWeight="bold"  justifySelf="center">{paqueteId}</Text>
+                <Text fontSize="30" fontWeight="bold"  justifySelf="center">{paquete.name}</Text>
                 <Usuario/>
             </SimpleGrid>
 
             <div style={{ display: 'flex', width: '100%', marginTop: "2em" }}>
                 <div style={{ flex: '0 0 65%', marginRight: '1em', marginLeft: '2em'  }}>
-                {items.map((item) => (
+                {lugares.map((item) => (
                    <LugarCard lugar={item}/>
                 ))}
                 </div>
