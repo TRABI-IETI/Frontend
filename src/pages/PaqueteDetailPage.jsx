@@ -7,6 +7,7 @@ import { useParams } from 'react-router';
 import { memoryHook } from "../hooks/memoryHook";
 import { getPackage } from '../services/packagesServices';
 import { getPlace } from "../services/placesServices";
+import { BotonScrollTop } from "../components/BotonScrollTop";
 
 const items = [
     {
@@ -106,6 +107,7 @@ const items = [
                     <Button bg="#f5d494" mt={4} onClick={handleAdd}>Comprar Paquete</Button>
                 </div>
             </div>
+            <BotonScrollTop/>
         </Flex>
     );
 };

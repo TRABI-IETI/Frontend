@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import getPackages from "../services/packagesServices";
 import { memoryHook } from "../hooks/memoryHook";
+import { BotonScrollTop } from "../components/BotonScrollTop";
 
 const items = [
     {
@@ -84,6 +85,7 @@ function Paquetes() {
             ))}
           </Stack>
         </Flex>
+        <BotonScrollTop/>
       </Flex>
   );
 }

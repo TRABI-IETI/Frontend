@@ -4,6 +4,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useEffect } from "react";
 import { PaqueteCard } from '../components/LugarBuyCard';
 import { memoryHook } from '../hooks/memoryHook';
+import { BotonScrollTop } from '../components/BotonScrollTop';
 
 const items = [
     {
@@ -77,39 +78,11 @@ function ShoppingCart(){
                         <Button mb={10} mt={10} mr={10} ml={10} color="black" background="#f5d494">Pagar</Button>
                     </Card>
                 </Box>
-            </div>        
+            </div> 
+            <BotonScrollTop/>       
         </Flex>
         
     )
 }
 
 export default ShoppingCart;
-
-/*
-
-<Card key={index} overflow="hidden" variant="outline" style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }}>
-                                <Flex>
-                                    <Box>
-                                        <Image
-                                            objectFit="cover"
-                                            maxW={{ base: "100%", sm: "250px" }}
-                                            src={item.image}
-                                            alt="card image"
-                                        />
-                                    </Box>
-                                    <Box>
-                                        <Stack>
-                                        <CardBody>
-                                            <Heading size="sm">{item.title}</Heading>
-                                            <Text py="2">{item.description}</Text>
-                                        </CardBody>
-                                        <CardFooter>
-                                            <Button variant="solid" color="black" background="#f5d494">
-                                                Buy for ${item.price}
-                                            </Button>
-                                        </CardFooter>
-                                        </Stack>
-                                    </Box>
-                                </Flex>
-                            </Card>
-*/

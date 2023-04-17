@@ -6,6 +6,7 @@ import getPlaces from "../services/placesServices";
 import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { Link } from "react-router-dom";
+import { BotonScrollTop } from "../components/BotonScrollTop";
 
 const items = [
     {
@@ -76,6 +77,7 @@ function Lugares() {
             ))}
           </Stack>
         </Flex>
+        <BotonScrollTop/>
       </Flex>
   );
 }
