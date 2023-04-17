@@ -11,8 +11,9 @@ import { memoryHook } from "../hooks/memoryHook";
 import { BotonScrollTop } from "../components/BotonScrollTop";
 import { CrearTrabi } from "../components/CrearTrabi";
 
-const idUsuario = JSON.parse(localStorage.getItem("usuarioCookie")).id
+
 function MisTrabi() {
+  const idUsuario = JSON.parse(localStorage.getItem("usuarioCookie")).id
   const [memoPackages, addPackages, removePackage] = memoryHook();
 
   const [isOpen, setIsOpen] = useState(false);

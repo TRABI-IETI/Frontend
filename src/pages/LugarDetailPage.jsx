@@ -9,10 +9,10 @@ import { getPlace } from '../services/placesServices';
 import getPackages, { addPlaceToPackage, updatePackage } from '../services/packagesServices';
 import { BotonScrollTop } from '../components/BotonScrollTop';
 
-const idUsuario = JSON.parse(localStorage.getItem("usuarioCookie")).id
+
 
 export default function LugarDetailPage(){
-
+    const idUsuario = JSON.parse(localStorage.getItem("usuarioCookie")).id
     const {lugarId} = useParams();
     const [lugar, setLugar] = useState({});
     const [packages, setPackages] = useState([])
