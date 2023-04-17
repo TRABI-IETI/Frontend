@@ -6,38 +6,28 @@ import { Usuario } from '../components/usuario';
 import { ArrowBackIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import { useParams } from 'react-router';
 import { getPlace } from '../services/placesServices';
+import getPackages, { addPlaceToPackage } from '../services/packagesServices';
 
-const packages = [
-    {
-        image:
-          "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
-        id: 1,
-        title: 'Paquete 1',
-        price: '1000',  
-        description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-    }, 
-    {
-        image:
-          "https://images.unsplash.com/photo-1503177119275-0aa32b3a9368?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
-        id: 2,
-        title: 'Paquete 2',
-        price: '1000',  
-        description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
-      },
-]
+const idUsuario = "prueba"
 
 export default function LugarDetailPage(){
 
     const {lugarId} = useParams();
     const [lugar, setLugar] = useState({});
-
+    const [packages, setPackages] = useState([])
+ 
     useEffect(() => {
         window.scrollTo(0, 0);
         getPlace(lugarId).then((lugar) => setLugar(lugar));
+        getPackages({"idUsuario": idUsuario}).then((paquete) => setPackages(paquete));
       }, [])
 
   const handleBack=()=>{
     window.history.back()
+  }
+
+  const handleAddToPackage=(packagId)=>{
+    addPlaceToPackage(packagId, lugarId);
   }
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
@@ -75,7 +65,7 @@ export default function LugarDetailPage(){
                         </MenuButton>
                         <MenuList>
                         {packages.map((packageS) => (
-                            <MenuItem>{packageS.title}</MenuItem>
+                            <MenuItem onClick={() => handleAddToPackage(packageS.id)}>{packageS.name}</MenuItem>
                         ))}
                         </MenuList>
                     </Menu>

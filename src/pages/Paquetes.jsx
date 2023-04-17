@@ -50,14 +50,12 @@ const items = [
       description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     }
   ];
-
+  
 function Paquetes() {
   const [memoPackages, addPackages, removePackage] = memoryHook();
 
   const [packages, setPackages] = useState([]);
 
-  const navigate = useNavigate();
-  
   useEffect(() => {
     window.scrollTo(0, 0);
     getPackages({"idUsuario": null}).then((paquetes) => setPackages(paquetes));
