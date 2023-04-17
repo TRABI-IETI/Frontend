@@ -6,6 +6,7 @@ import PaqueteDetailPage from './pages/PaqueteDetailPage';
 import LugarDetailPage from './pages/LugarDetailPage';
 import Lugares from './pages/Lugares';
 import MisTrabi from './pages/MisTrabi';
+import NewLugar from './pages/NewLugar';
 
 export function AppRouter(){
     return (
@@ -18,6 +19,7 @@ export function AppRouter(){
             <Route path="/descripcionPaquete/:paqueteId" element={<PaqueteDetailPage />} />
             <Route path="/descripcionLugar/:lugarId" element={<LugarDetailPage />} />
             <Route path="/misTrabi" element={<MisTrabi />} />
+            <Route path="/newLugar" element={<NewLugar />} />
           </Routes>
         </BrowserRouter>
       );
