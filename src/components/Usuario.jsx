@@ -10,7 +10,12 @@ export function Usuario(){
         navigate("/shoppingCart")
     }
     const handleHome = ()=>{
+        navigate("/home")
+    }
+
+    const handleLogout = ()=>{
         navigate("/")
+        localStorage.clear()
     }
     return(
         <Box>
@@ -20,7 +25,7 @@ export function Usuario(){
                 <MenuButton as={Avatar} name='Dan Abrahmov' src='https://bit.ly/dan-abramov' size="md" />
                 <MenuList>
                     <MenuItem>Perfil</MenuItem>
-                    <MenuItem>Cerrar sesión</MenuItem>
+                    <MenuItem onClick={handleLogout} >Cerrar sesión</MenuItem>
                 </MenuList>
             </Menu>
         </Box>

@@ -7,11 +7,13 @@ import LugarDetailPage from './pages/LugarDetailPage';
 import Lugares from './pages/Lugares';
 import MisTrabi from './pages/MisTrabi';
 
+import Login from './pages/Login';
 export function AppRouter(){
     return (
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Login />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/shoppingCart" element={<ShoppingCart />} />
             <Route path="/paquetes" element={<Paquetes />} />
             <Route path="/lugares" element={<Lugares />} />
