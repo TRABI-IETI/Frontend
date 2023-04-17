@@ -3,8 +3,12 @@ import { useState, useEffect } from "react";
 import { getPlace } from '../services/placesServices';
 
 export function PaqueteCard(props){
-    const {paquete} = props;
+    const {paquete, onBuy, onCart, onRemove} = props;
     const [lugar, setLugar] = useState({});
+
+    function handlebuy (){
+      onBuy(paquete);
+    }
 
     useEffect(() => {
       window.scrollTo(0, 0);
@@ -29,7 +33,7 @@ export function PaqueteCard(props){
                   <Text py='2'>{paquete.description}</Text>
                 </CardBody>
                 <CardFooter>
-                  <Button variant='solid' colorScheme='blue'>
+                  <Button variant='solid' colorScheme='blue'onClick={handlebuy}>
                     ${paquete.price}
                   </Button>
                 </CardFooter>

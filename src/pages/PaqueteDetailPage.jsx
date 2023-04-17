@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useParams } from 'react-router';
+import { memoryHook } from "../hooks/memoryHook";
 import { getPackage } from '../services/packagesServices';
 import { getPlace } from "../services/placesServices";
 
@@ -44,6 +45,7 @@ const items = [
     const {paqueteId} = useParams();
     const [paquete, setPaquete] = useState({});
     const [lugares, setLugares] = useState([]);
+    const [memoPackages, addPackages, removePackage] = memoryHook();
   
     function mapToPlace(places){
       const altPromise = places.map((data)=>getPlace(data).then(value=>value))
@@ -73,6 +75,10 @@ const items = [
       window.history.back()
     }
 
+    function handleAdd(){
+      addPackages(paquete)
+    }
+
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
             <SimpleGrid columns={[1,2,3]} spacing={{ base: '1em', md: '2em', lg: '3em' }} width="100%">
@@ -98,7 +104,7 @@ const items = [
                             Precio: {paquete.price}
                         </Text>
                     </Card>
-                    <Button bg="#f5d494" mt={4}>Comprar Paquete</Button>
+                    <Button bg="#f5d494" mt={4} onClick={handleAdd}>Comprar Paquete</Button>
                 </div>
             </div>
         </Flex>

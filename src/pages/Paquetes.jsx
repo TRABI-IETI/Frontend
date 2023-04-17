@@ -6,6 +6,7 @@ import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import getPackages from "../services/packagesServices";
+import { memoryHook } from "../hooks/memoryHook";
 
 const items = [
     {
@@ -51,9 +52,12 @@ const items = [
   ];
 
 function Paquetes() {
+  const [memoPackages, addPackages, removePackage] = memoryHook();
 
   const [packages, setPackages] = useState([]);
 
+  const navigate = useNavigate();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
     getPackages({"idUsuario": null}).then((paquetes) => setPackages(paquetes));
@@ -62,6 +66,11 @@ function Paquetes() {
   const handleBack=()=>{
     window.history.back()
   }
+
+  function onBuy(item){
+    addPackages(item)
+  }
+
   
 
   return (
@@ -77,7 +86,7 @@ function Paquetes() {
           <Stack spacing={3}>
             {packages.map((item) => (
               <Link to={`/descripcionPaquete/${item.id}`} style={{textDecoration: 'none'}}>
-                <PaqueteCard paquete={item}/>
+                <PaqueteCard paquete={item} onBuy={onBuy}/>
               </Link>
             ))}
           </Stack>
