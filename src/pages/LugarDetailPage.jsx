@@ -31,11 +31,9 @@ export default function LugarDetailPage(){
   }
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
-            <SimpleGrid columns={[1,2,3]} spacing={{ base: '1em', md: '2em', lg: '3em' }} width="100%">
-            <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
-                <Text fontSize="30" fontWeight="bold"  justifySelf="center">{lugarId}</Text>
+                {/* <Text fontSize="30" fontWeight="bold"  justifySelf="center">{lugarId}</Text> */}
                 <Usuario/>
-            </SimpleGrid>
+                <Heading textAlign={"center"}>{lugarId}</Heading>
 
             <div style={{ display: 'flex', width: '100%', marginTop: "2em" }}>
                 <div style={{ flex: '0 0 65%', marginRight: '1em', marginLeft: '2em'  }}>

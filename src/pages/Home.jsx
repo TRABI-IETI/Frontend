@@ -3,9 +3,8 @@ import { Flex, Heading, Card, Box, Image, Text , Divider, IconButton, SimpleGrid
 import { Link, useNavigate } from "react-router-dom";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { FaFacebook, FaTwitter, FaWhatsapp, FaEllipsisV, FaShoppingCart  } from 'react-icons/fa';
-import ShoppingCart from './ShoppingCart';
 import { Usuario } from '../components/usuario';
-
+import { useState } from 'react';
 
 const items = [
     {
@@ -62,21 +61,56 @@ const items = [
   ];
 
 function Home() {
+  const [currentImage, setCurrentImage] = useState(items[0].image);
+  // const styles = {
+  //   root: {
+  //     position: 'relative',
+  //     '::before': {
+  //       content: '""',
+  //       position: 'absolute',
+  //       top: 0,
+  //       left: 0,
+  //       width: '100%',
+  //       height: '100%',
+  //       zIndex: -1,
+  //       backgroundSize: 'cover',
+  //       backgroundPosition: 'center',
+  //       filter: 'blur(10px)',
+  //       backgroundImage: `url(${currentImage})`,
+  //     },
+  //   },
+  // };
+  // const handleSlideChange = (index) => {
+  //   setCurrentImage(index);
+  // };
+  // const blurImage = blurDataUrl(items[currentImage].image, 20, 10);
+
+  // const handleImageLoad = (event) => {
+  //   event.target.style.filter = "blur(10px)";
+  // };
+  const handleImageChange = (newIndex) => {
+    setCurrentImage(items[newIndex].image);
+  };
+  
     return (
       <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
-        <SimpleGrid column={3} alignItems={"center"} width={"100%"} >
-            <Box></Box>
-            <Heading gridColumn={"2"} textAlign={"center"}>TRABI</Heading>
-        <Box gridColumn={"3"} justifySelf={"end"} mr={10}>
             <Usuario/>
-        </Box>
-        </SimpleGrid>
-        <Box maxWidth={{base: "90%", md: "80%", lg: "60%"}} mx="auto" mb={7}>
-          <Carousel showThumbs={false} showStatus={false} showArrows={true} infiniteLoop autoPlay interval={3000}>
+            <Heading textAlign={"center"}>TRABI</Heading>
+        <Box
+      position="relative"
+      backgroundImage={`url(${currentImage})`}
+      backgroundSize="cover"
+      backgroundPosition="center"
+      mt={7}
+      // filter="blur(5px)"
+    >
+        <Box maxWidth={{base: "90%", md: "80%", lg: "60%"}} mx="auto" mb={7} overflow={"hidden"} zIndex={"1"}>
+          <Carousel onChange={handleImageChange}
+          showThumbs={false} showStatus={false} showArrows={false} infiniteLoop autoPlay interval={3000}>
             {items.map((item) => (
               <Box key={item.title} p={4}>
-                <Card boxShadow="base" >
-                  <Image src={item.image} alt={item.title} />
+                <Card boxShadow="20px 20px 80px rgba(0, 0, 0, 0.2)"  borderRadius="md" p={7}>
+                  <Image src={item.image} alt={item.title}/>
                   <Box p={4}>
                     <Heading size="md">{item.title}</Heading>
                     <Text mt={4}>{item.description}</Text>
@@ -85,6 +119,7 @@ function Home() {
               </Box>
             ))}
           </Carousel>
+        </Box>
         </Box>
         <Divider/>
         <Flex mt={"7"} mb={7}>
@@ -133,3 +168,4 @@ function Home() {
   }
 
   export default Home
+

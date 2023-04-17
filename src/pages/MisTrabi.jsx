@@ -31,14 +31,9 @@ function MisTrabi() {
 
   return (
     <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
-        <SimpleGrid column={3} alignItems={"center"} width={"100%"} >
-        <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
-            <Heading gridColumn={"2"} textAlign={"center"}>PAQUETES</Heading>
-        <Box gridColumn={"3"} justifySelf={"end"} mr={10}>
             <Usuario/>
-        </Box>
-        </SimpleGrid>
-        <Flex justifyContent="space-between" alignItems="center">
+            <Heading textAlign={"center"}>MIS TRABI</Heading>
+        <Flex justifyContent="space-between" alignItems="center" mt={7}>
           <Stack spacing={3}>
             {packages.map((item) => (
               <Link to={`/descripcionPaquete/${item.id}`} style={{textDecoration: 'none'}}>
