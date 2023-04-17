@@ -46,7 +46,7 @@ const items = [
     const [lugares, setLugares] = useState([]);
   
     function mapToPlace(places){
-      const altPromise = places.map((data)=>getPromisePlaces(data).then(value=>value))
+      const altPromise = places.map((data)=>getPlace(data).then(value=>value))
       return altPromise;
     }
   
@@ -58,38 +58,9 @@ const items = [
   
     function fetchPaquete() {
       window.scrollTo(0, 0);
-      getPromise(paqueteId).then(data=>getLugares(data.places));
-    }
-  
-    function getPromisePlaces(place) {
-      return new Promise((resolve, reject) => {
-        fetch("http://localhost:8082/v1/places/"+place, {
-        }).then((response) => {
-            if (response.ok) {
-              return response.json();
-            }
-            reject(
-              "No hemos podido recuperar ese json. El código de respuesta del servidor es: " + response.status
-            );
-          })
-          .then((json) => resolve(json))
-          .catch((err) => reject(err));
-      });
-    }
-  
-    function getPromise(packagesOne) {
-      return new Promise((resolve, reject) => {
-        fetch("http://localhost:8081/v1/packages/"+packagesOne, {
-        }).then((response) => {
-            if (response.ok) {
-              return response.json();
-            }
-            reject(
-              "No hemos podido recuperar ese json. El código de respuesta del servidor es: " + response.status
-            );
-          })
-          .then((json) => resolve(json))
-          .catch((err) => reject(err));
+      getPackage(paqueteId).then(data=>{
+        setPaquete(data);
+        getLugares(data.places)
       });
     }
   
@@ -103,8 +74,6 @@ const items = [
     }
 
     return(
-      <div>
-        {/* {paquete ? ( */}
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
             <SimpleGrid columns={[1,2,3]} spacing={{ base: '1em', md: '2em', lg: '3em' }} width="100%">
             <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
@@ -119,25 +88,20 @@ const items = [
                 ))}
                 </div>
 
-                <div style={{ flex: '0 0 30%', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>            
+                <div style={{ flex: '0 0 30%', maxWidth:'25vw', flexDirection: 'column', alignlugar: 'center'}}>            
                     <Card mt="3">
                         <Text ml={2}>
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                            Descripción: {paquete.description}
+                            <br/>
+                            Duración apróximada: {paquete.duration}
+                            <br/>
+                            Precio: {paquete.price}
                         </Text>
                     </Card>
                     <Button bg="#f5d494" mt={4}>Comprar Paquete</Button>
                 </div>
             </div>
         </Flex>
-        {/* ) : (
-          // Renderizar un mensaje de carga mientras se obtienen los datos
-          <p>Cargando...</p>
-        )} */}
-        </div>
     );
 };
 
