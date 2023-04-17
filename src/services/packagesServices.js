@@ -54,15 +54,15 @@ export async function addPlaceToPackage(packageId, place){
 
 export async function updatePackage(packageId, newPackage){
     const options = {
-        method: 'POST',
+        method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify(newPackage)
       };
-    const response = await fetch("http://localhost:8081/v1/packages/"+packageId+"/"+place, options);
+    const response = await fetch("http://localhost:8081/v1/packages/"+packageId+"/", options);
     if (response.ok) {
     const jsonResponse = await response.json();
-    console.log(jsonResponse);
     return jsonResponse;
     }else{
         const errorReason = await response.json()
