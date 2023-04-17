@@ -6,6 +6,8 @@ import { createTrabi } from "../services/packagesServices";
 
 export function CrearTrabi(props){
 
+    const [valid, setValid] = useState(false);
+
     const [formulario, setFormulario] = useState({
         name: "",
         description: ""
@@ -17,6 +19,11 @@ export function CrearTrabi(props){
           ...prevState,
           [name]: value,
         }));
+        if(formulario.name.trim() !== '' && formulario.description.trim() !== ''){
+            setValid(true);
+        } else {
+            setValid(false);
+        }
       };
 
     const handleSubmit = (event) => {
@@ -43,12 +50,12 @@ export function CrearTrabi(props){
                         <FormLabel mt={4}>Descripción</FormLabel>
                         <Input name="description" as="textarea" value={formulario.description} onChange={handleChange} variant='filled' placeholder='Descripción del lugar' width="92%"/>
                     </FormControl>
+                    <ModalFooter>
+                        <Button colorScheme="blue" type="">Crear</Button>
+                        <Button ml={4} onClick={onClose}>Cancelar</Button>
+                    </ModalFooter>
                 </form>
                 </ModalBody>
-                <ModalFooter>
-                    <Button colorScheme="blue" onClick={handleSubmit}>Crear</Button>
-                    <Button ml={4} onClick={onClose}>Cancelar</Button>
-                </ModalFooter>
             </ModalContent>
         </Modal>
     )
