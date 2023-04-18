@@ -62,7 +62,7 @@ export default function LugarDetailPage(){
                         </Text>
                     </Card>
                     <Stack spacing={4} direction='row' align='center' mt={4}>
-                    <Button bg="#f5d494" >Comprar</Button>
+                    {/* <Button bg="#f5d494" >Comprar</Button> */}
                     {packages.length ? (
                     <Menu>
                         <MenuButton bg="#f5d494" as={Button} rightIcon={<ChevronDownIcon />}>

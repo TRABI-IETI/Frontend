@@ -32,11 +32,11 @@ export function PaqueteCard(props){
                   <Text py='2'>{paquete.description}</Text>
                 </CardBody>
                 <CardFooter>
-                {location.pathname === '/shoppingCart' ? null : (
+                {/* {location.pathname === '/shoppingCart' ? null : (
                   <Button variant='solid' colorScheme='blue' onClick={handlebuy}>
                     Buy for ${paquete.price}
                   </Button>
-                  )}
+                  )} */}
                   {!checkUser() || location.pathname === '/shoppingCart' ? null : (
                     <IconButton icon={<DeleteIcon />} variant={'outline'} colorScheme="#ff2b00" ml={3} onClick={handleDeletePlace}/>
 
