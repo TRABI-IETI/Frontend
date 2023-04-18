@@ -30,6 +30,7 @@ export function CrearTrabi(props){
         event.preventDefault();
         formulario.idUsuario = JSON.parse(localStorage.getItem("usuarioCookie")).id
         createTrabi(formulario.name, formulario);
+        location.reload();
     };
 
 
