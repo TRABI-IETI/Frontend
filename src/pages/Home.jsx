@@ -67,24 +67,29 @@ const items = [
 
 function Home() {
   const [currentImage, setCurrentImage] = useState(items[0].image);
+
   const handleImageChange = (newIndex) => {
     setCurrentImage(items[newIndex].image);
   };
 
   const [packages, setPackages] = useState([]);
-  const [lugarImagen,setLugarImage] = useState([]);
+  const [lugarImagen, setLugarImagen] = useState([]);
+  const {getImagePlace} = usePlaceHook();
+  const [isLoading, setIsLoading] = useState(false);
 
-  const {getImagePlace, lugares} = usePlaceHook()
   useEffect(() => {
     window.scrollTo(0, 0);
-    getPackages({"idUsuario": null}).then((paquetes) => {
-      setPackages(paquetes) 
-      console.log(paquetes)
-      paquetes.map((value =>getImagePlace(value)))
-      
-    });
-    console.log(lugares)
+    if (!isLoading) { // Verifica si isLoading es false antes de actualizar el estado con setData
+      getPackages({"idUsuario": null}).then((paquetes) => {
+        setPackages(paquetes) 
+      })
+    }
+    ;
   }, []);
+
+  const handleIamage = () => {
+    return "https://upload.wikimedia.org/wikipedia/commons/7/7d/Monserrate_Sanctuary.JPG"
+  }
   
     return (
       <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
@@ -106,7 +111,9 @@ function Home() {
               <Box key={item.name} p={4}>
                 <Link to={`/descripcionPaquete/${item.id}`} style={{textDecoration: 'none'}}>
                 <Card boxShadow="20px 20px 80px rgba(0, 0, 0, 0.2)"  borderRadius="md" p={7}>
-                  <Image src={lugares[0].imagen} alt={item.name}/>
+
+                  <Image src={handleIamage} alt={item.name}/>
+
                   <Box p={4}>
                     <Heading size="md">{item.name}</Heading>
                     <Text mt={4}>{item.description}</Text>
