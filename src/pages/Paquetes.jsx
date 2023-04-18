@@ -91,7 +91,7 @@ function Paquetes() {
           <Stack spacing={3}>
             {packages.map((item) => (
               <Link to={`/descripcionPaquete/${item.id}`} style={{textDecoration: 'none'}}>
-                <PaqueteCard paquete={item} onBuy={onBuy}/>
+                <PaqueteCard paquete={item} onBuy={onBuy} onCart={true}/>
               </Link>
             ))}
           </Stack>

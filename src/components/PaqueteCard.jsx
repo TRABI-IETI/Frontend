@@ -15,14 +15,18 @@ export function PaqueteCard(props){
     useEffect(() => {
       window.scrollTo(0, 0);
       const places = paquete.places;
+      if(places !== undefined){
+        if(places.length === 0){
+          const prov = {"imagen": "https://cdn.discordapp.com/attachments/1097284237528399962/1097319695763374130/Blank-Package-PNG-Image.png"}
+          setLugar(prov);
+        }else{
+          const place = places[0]
 
-      if(places.length === 0){
-        const prov = {"imagen": "https://cdn.discordapp.com/attachments/1097284237528399962/1097319695763374130/Blank-Package-PNG-Image.png"}
-        setLugar(prov);
+          getPlace(place).then((lugar) => setLugar(lugar));
+        }
       }else{
-        const place = places[0]
-
-        getPlace(place).then((lugar) => setLugar(lugar));
+        const prov = {"imagen": "https://www.freeiconspng.com/thumbs/error-icon/sign-error-icon-10.png"}
+        setLugar(prov);
       }
     }, [])
 
@@ -45,7 +49,7 @@ export function PaqueteCard(props){
                   <Heading size='md'>{paquete.name}</Heading>
                   <Text py='2'>{paquete.description}</Text>
                 </CardBody>
-                <CardFooter>
+                <CardFooter display={onCart ? "block" : "none"}>
                   <Button variant='solid' colorScheme='blue'onClick={handlebuy}>
                     ${paquete.price}
                   </Button>

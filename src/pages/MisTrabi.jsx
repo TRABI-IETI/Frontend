@@ -42,7 +42,9 @@ function MisTrabi() {
     let datos = [...packPaid] 
     for(let i = 0; i< cardPack.length; i++){
       const data = await getPackage(cardPack[i])
-      datos.push(data)
+      if(data !== null){
+        datos.push(data)
+      }
     }
     setPackPaid(datos)
   }
@@ -65,13 +67,13 @@ function MisTrabi() {
           <Stack spacing={3}>
             {packages.map((item) => (
               <Link to={`/descripcionPaquete/${item.id}`} style={{textDecoration: 'none'}}>
-                <PaqueteCard paquete={item} onBuy={onBuy}/>
+                <PaqueteCard paquete={item} onBuy={onBuy} onCart={true}/>
               </Link>
             ))} 
             <Divider style={{  borderWidth: "3px"}}></Divider>
             <Heading textAlign={"center"}>Comprados</Heading>
             {packPaid.map((item) =>(
-              <PaqueteCard paquete={item} onBuy={onBuy}/>
+              <PaqueteCard paquete={item} onCart={false}/>
             ))}
           </Stack>
         </Flex>
