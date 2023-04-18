@@ -33,7 +33,7 @@ export function Usuario(){
 
     function checkPackages() {
         const packages = JSON.parse(localStorage.getItem('packages'));
-        return packages.length > 0;
+        return packages && packages.length > 0;
       }
 
     return(

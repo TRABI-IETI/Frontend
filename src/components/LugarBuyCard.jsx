@@ -11,6 +11,12 @@ export function PaqueteCard(props){
     }
     const location = useLocation();
 
+    function checkUser() {
+      const user = JSON.parse(localStorage.getItem('usuarioCookie'));
+      console.log(user.role === 'A')
+      return user.role === 'A';
+    }
+
     return(
         <Card direction={{ base: 'column', sm: 'row' }} overflow='hidden' variant='outline' style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }}>
                 <Image objectFit='cover' maxW={{ base: '100%', sm: '200px' }} src={paquete.imagen} alt={paquete.name}/>
@@ -25,7 +31,10 @@ export function PaqueteCard(props){
                     Buy for ${paquete.price}
                   </Button>
                   )}
-                  {}
+                  {!checkUser() || location.pathname === '/shoppingCart' ? null : (
+                    <IconButton icon={<DeleteIcon />} variant={'outline'} colorScheme="#ff2b00" ml={3} onClick={() => handleDeletePlace()}/>
+
+                  )}
                   <IconButton display={onCart ? "block" : "none"} ml={3} bg="#ff2b00" variant={"outline"} icon={<DeleteIcon/>} onClick={onRemove}>Eliminar</IconButton>
                 </CardFooter>
               </Stack>

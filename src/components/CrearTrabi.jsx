@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { ModalFooter , Button, Heading, ModalContent, ModalOverlay, useDisclosure, ModalCloseButton, Stack, FormControl, FormLabel, Input    } from "@chakra-ui/react";
+import { ModalFooter , Button, Heading, ModalContent, ModalOverlay, useDisclosure, ModalCloseButton, Stack, FormControl, FormLabel, Input, ModalHeader } from "@chakra-ui/react";
 import { Modal } from "@chakra-ui/react";
-import { ModalBody, ModalHeader } from "reactstrap";
+import { ModalBody } from "reactstrap";
 import { createTrabi } from "../services/packagesServices";
 
 export function CrearTrabi(props){

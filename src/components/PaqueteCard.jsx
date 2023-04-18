@@ -1,6 +1,7 @@
-import { Flex, Stack, Heading, Card, Image, CardBody, Text, CardFooter, Button } from "@chakra-ui/react";
+import { Flex, Stack, Heading, Card, Image, CardBody, Text, CardFooter, Button, IconButton } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import { getPlace } from '../services/placesServices';
+import { DeleteIcon } from "@chakra-ui/icons";
 
 export function PaqueteCard(props){
     const {paquete, onBuy, onCart, onRemove} = props;
@@ -24,6 +25,12 @@ export function PaqueteCard(props){
       }
     }, [])
 
+    function checkUser() {
+      const user = JSON.parse(localStorage.getItem('usuarioCookie'));
+      console.log(user.role === 'A')
+      return user.role === 'A';
+    }
+
     return(
         <Card direction={{ base: 'column', sm: 'row' }} overflow='hidden' variant='outline' style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }}>
                 <Image objectFit='cover' maxW={{ base: '100%', sm: '200px' }} src={lugar.imagen} alt={paquete.name}/>
@@ -36,6 +43,10 @@ export function PaqueteCard(props){
                   <Button variant='solid' colorScheme='blue'onClick={handlebuy}>
                     ${paquete.price}
                   </Button>
+                  {!checkUser() ? null : (
+                    <IconButton icon={<DeleteIcon />} variant={'outline'} colorScheme="#ff2b00" ml={3} onClick={() => handleDeletePlace()}/>
+
+                  )}
                 </CardFooter>
               </Stack>
             </Card>

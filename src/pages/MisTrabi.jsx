@@ -57,7 +57,7 @@ function MisTrabi() {
           </Stack>
         </Flex>
         <Box position="fixed" bottom={4} right={4}>
-          <IconButton icon={<AddIcon/>} onClick={handleOpen} />
+          <IconButton color="#717171" size="md" borderRadius="full" icon={<AddIcon/>} onClick={handleOpen} />
         </Box>
         <CrearTrabi isOpen={isOpen} onClose={handleClose}></CrearTrabi>
         <BotonScrollTop/>

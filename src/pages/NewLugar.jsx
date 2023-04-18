@@ -59,16 +59,11 @@ function NewLugar() {
 
   return (
     <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
-        <SimpleGrid column={3} alignItems={"center"} width={"100%"} >
-        <IconButton justifySelf={"start"} icon={<ArrowBackIcon/>} variant={"ghost"} onClick={handleBack}/>
-            <Heading gridColumn={"2"} textAlign={"center"}>Nuevo Lugar</Heading>
-        <Box gridColumn={"3"} justifySelf={"end"} mr={10}>
             <Usuario/>
-        </Box>
-        </SimpleGrid>
+            <Heading textAlign={"center"}>NUEVO LUGAR</Heading>
         <Flex justifyContent="space-between" alignItems="center">
         </Flex>
-        <Box>
+        <Box mt={7}>
             <form onSubmit={handleSubmit}>
                 <Stack spacing={4}>
                 <FormControl isRequired>
@@ -103,12 +98,17 @@ function NewLugar() {
                     <FormLabel>Imagen</FormLabel>
                     <Input name="imagen" type="text" value={formulario.urlImage} onChange={handleChange} variant='filled' placeholder='Url de la Imagen'/>
                 </FormControl>
+                <Stack spacing={4} direction='row' align='center'>
                 <Button colorScheme="blue" type="submit">
                     Enviar
                 </Button>
                 <Button colorScheme="blue" type="delete" onClick={handleClearFiels}>
-                    Borrar
+                    Limpiar
                 </Button>
+                <Button colorScheme="blue" type="delete" onClick={handleClearFiels}>
+                    Cancelar
+                </Button>
+                </Stack>
                 </Stack>
             </form>
         </Box>

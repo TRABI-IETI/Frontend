@@ -2,7 +2,7 @@ import { Flex, Stack, Heading, SimpleGrid, Box, IconButton, Image, CardBody, Tex
 import { PaqueteCard } from "../components/PaqueteCard";
 import { useEffect, useState } from "react";
 import { Usuario } from '../components/usuario';
-import { ArrowBackIcon } from "@chakra-ui/icons";
+import { AddIcon, ArrowBackIcon, ArrowUpIcon } from "@chakra-ui/icons";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
 import getPackages from "../services/packagesServices";
@@ -56,6 +56,8 @@ function Paquetes() {
   const [memoPackages, addPackages, removePackage] = memoryHook();
 
   const [packages, setPackages] = useState([]);
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -70,6 +72,15 @@ function Paquetes() {
     addPackages(item)
   }
 
+  const handleCreatePaquete=()=>{
+    navigate("/newLugar")
+  }
+
+  function checkUser() {
+    const user = JSON.parse(localStorage.getItem('usuarioCookie'));
+    console.log(user.role === 'A')
+    return user.role === 'A';
+  }
   
 
   return (
@@ -85,6 +96,9 @@ function Paquetes() {
             ))}
           </Stack>
         </Flex>
+        <Box display={!checkUser() ? "none" : "block"}  position="fixed" bottom={4} right={4}>
+        <IconButton icon={<AddIcon/>} color="#717171" size="md" borderRadius="full" onClick={handleCreatePaquete}/>
+        </Box>
         <BotonScrollTop/>
       </Flex>
   );

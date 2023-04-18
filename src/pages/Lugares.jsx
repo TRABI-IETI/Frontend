@@ -4,8 +4,8 @@ import { PaqueteCard } from "../components/LugarBuyCard";
 import { useEffect, useState } from "react";
 import getPlaces from "../services/placesServices";
 import { Usuario } from '../components/usuario';
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { Link } from "react-router-dom";
+import { AddIcon, ArrowBackIcon } from "@chakra-ui/icons";
+import { Link, useNavigate } from "react-router-dom";
 import { BotonScrollTop } from "../components/BotonScrollTop";
 
 const items = [
@@ -54,6 +54,7 @@ const items = [
 function Lugares() {
 
   const [lugares, setLugares] = useState([]);
+  const navigate = useNavigate()
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -62,6 +63,15 @@ function Lugares() {
 
     const handleBack=()=>{
       window.history.back()
+    }
+
+    const handleCreateLugar=()=>{
+      navigate("/newLugar")
+    }
+    function checkUser() {
+      const user = JSON.parse(localStorage.getItem('usuarioCookie'));
+      console.log(user.role === 'A')
+      return user.role === 'A';
     }
 
   return (
@@ -77,6 +87,9 @@ function Lugares() {
             ))}
           </Stack>
         </Flex>
+        <Box display={!checkUser() ? "none" : "block"} position="fixed" bottom={4} right={4}>
+        <IconButton icon={<AddIcon/>} color="#717171" size="md" borderRadius="full" onClick={handleCreateLugar}/>
+        </Box>
         <BotonScrollTop/>
       </Flex>
   );
