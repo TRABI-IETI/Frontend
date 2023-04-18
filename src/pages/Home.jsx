@@ -14,7 +14,7 @@ import { usePlaceHook } from '../hooks/usePlaceHook';
 const items = [
     {
       image:
-        "https://images.unsplash.com/photo-1546768292-fb12f6c92568?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        "https://images.unsplash.com/photo-1483729558449-99ef09a8c325?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1350&q=80",
         title: 'Card 3', 
         description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.'
     },
@@ -67,12 +67,14 @@ const items = [
 
 function Home() {
   const [currentImage, setCurrentImage] = useState(items[0].image);
+
   const handleImageChange = (newIndex) => {
     setCurrentImage(items[newIndex].image);
   };
   const [packages, setPackages] = useState([]);
-  const [lugarImagen,setLugarImage] = useState([]);
-  const {getImagePlace, lugares} = usePlaceHook()
+  const [lugarImagen, setLugarImagen] = useState([]);
+  const {getImagePlace} = usePlaceHook();
+  const [isLoading, setIsLoading] = useState(false);
 
   if(!localStorage.getItem("packages")){
     localStorage.setItem("packages", JSON.stringify([]));
@@ -80,14 +82,17 @@ function Home() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    getPackages({"idUsuario": null}).then((paquetes) => {
-      setPackages(paquetes) 
-      console.log(paquetes)
-      paquetes.map((value =>getImagePlace(value)))
-      
-    });
-    console.log(lugares)
+    if (!isLoading) { // Verifica si isLoading es false antes de actualizar el estado con setData
+      getPackages({"idUsuario": null}).then((paquetes) => {
+        setPackages(paquetes) 
+      })
+    }
+    ;
   }, []);
+
+  const handleIamage = () => {
+    return "https://upload.wikimedia.org/wikipedia/commons/7/7d/Monserrate_Sanctuary.JPG"
+  }
   
     return (
       <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
@@ -108,7 +113,9 @@ function Home() {
               <Box key={item.name} p={4}>
                 <Link to={`/descripcionPaquete/${item.id}`} style={{textDecoration: 'none'}}>
                 <Card boxShadow="20px 20px 80px rgba(0, 0, 0, 0.2)"  borderRadius="md" p={7}>
-                  <Image src={lugares[0].imagen} alt={item.name}/>
+
+                  <Image src={handleIamage()} alt={item.name}/>
+
                   <Box p={4}>
                     <Heading size="md">{item.name}</Heading>
                     <Text mt={4}>{item.description}</Text>
