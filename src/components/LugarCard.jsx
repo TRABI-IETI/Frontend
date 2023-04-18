@@ -30,7 +30,7 @@ export function LugarCard(props){
                 )}
                 </Box>
                 {idUser !== JSON.parse(localStorage.getItem("usuarioCookie")).id ? null : (
-                    <IconButton icon={<DeleteIcon />} variant={'outline'} colorScheme="#ff2b00" marginLeft="auto"onClick={() => handleDeletePlace()}/>
+                    <IconButton icon={<DeleteIcon />} variant={'outline'} colorScheme="#ff2b00" marginLeft="auto" onClick={() => handleDeletePlace()}/>
                 )}
 
                 

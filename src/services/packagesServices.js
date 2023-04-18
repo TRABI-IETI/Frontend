@@ -106,3 +106,21 @@ export async function deletePlaceToPackage(packageId, place){
       return errorReason;
   }
 };
+
+export async function deletePackage(packageId){
+  const options = {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    };
+  const response = await fetch("http://localhost:8081/v1/packages/"+packageId, options);
+  if (response.ok) {
+  const jsonResponse = await response.json();
+  console.log(jsonResponse);
+  return jsonResponse;
+  }else{
+      const errorReason = await response.json()
+      return errorReason;
+  }
+};

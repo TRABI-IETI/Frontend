@@ -32,3 +32,21 @@ export async function createPlace(data){
         return errorReason;
     }
 };
+
+export async function deletePlace(place){
+    const options = {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+    const response = await fetch("http://localhost:8082/v1/places/"+place, options);
+    if (response.ok) {
+    const jsonResponse = await response.json();
+    console.log(jsonResponse);
+    return jsonResponse;
+    }else{
+        const errorReason = await response.json()
+        return errorReason;
+    }
+};

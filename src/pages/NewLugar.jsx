@@ -5,8 +5,11 @@ import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import {FormControl, FormLabel, FormErrorMessage, FormHelperText} from '@chakra-ui/react'
 import { createPlace } from "../services/placesServices";
+import { useNavigate } from "react-router-dom";
 
 function NewLugar() {
+
+  const navigate = useNavigate() 
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -38,6 +41,7 @@ function NewLugar() {
   const handleSubmit = (event) => {
     event.preventDefault();
     createPlace(formulario);
+    navigate("/lugares")
     
     //alert(`Nombre: ${formulario.nombre} Direccion: ${formulario.direccion} Telefono: ${formulario.telefono} Horario: ${formulario.horario} Precio: ${formulario.precio} Restriccion: ${formulario.restriccion} Descripcion: ${formulario.descripcion} Image: ${formulario.urlImage}`);
   };
@@ -56,6 +60,10 @@ function NewLugar() {
   }
 
   const [formValidation, setFormValidation] = useState('')
+
+  const handleCancel=()=>{
+    navigate("/lugares")
+  }
 
   return (
     <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
@@ -105,7 +113,7 @@ function NewLugar() {
                 <Button colorScheme="blue" type="delete" onClick={handleClearFiels}>
                     Limpiar
                 </Button>
-                <Button colorScheme="blue" type="delete" onClick={handleClearFiels}>
+                <Button colorScheme="blue" type="delete" onClick={handleCancel}>
                     Cancelar
                 </Button>
                 </Stack>

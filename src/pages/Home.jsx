@@ -92,7 +92,6 @@ function Home() {
     return (
       <Flex justifyContent= "center" alignItems= "center" flexDirection="column">
             <Usuario/>
-            <button onClick={()=>console.log(lugares)}>hola</button>
             <Heading textAlign={"center"}>TRABI</Heading>
         <Box
       position="relative"
