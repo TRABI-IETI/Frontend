@@ -21,5 +21,10 @@ export function memoryHook(){
         localStorage.setItem("packages", JSON.stringify(newList));
     }
 
-    return [packages, addPackage, removePackage]
+    function clearDdata(){
+        setPackages([])
+        console.log("A")
+    }
+
+    return [packages, addPackage, removePackage, clearDdata]
 }

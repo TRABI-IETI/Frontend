@@ -1,4 +1,4 @@
-import { useMediaQuery, Flex, Heading, Card, Image, Text, Stack, CardBody, CardFooter, Button, Box, SimpleGrid, IconButton  } from '@chakra-ui/react'
+import { useMediaQuery, Flex, Heading, Card, Image, Text, Stack, CardBody, CardFooter, Button, Box, SimpleGrid, IconButton, useStatStyles  } from '@chakra-ui/react'
 import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useEffect } from "react";
@@ -43,8 +43,8 @@ const items = [
   
 
 function ShoppingCart(){
-    
-    const [packages, addPackages, removePackage] = memoryHook();
+
+    const [packages, addPackages, removePackage, clearData] = memoryHook();
 
     const [isLargerThanMd] = useMediaQuery("(min-width: 10vw)");
 
@@ -62,9 +62,11 @@ function ShoppingCart(){
     function handleBuy(){
       let cookieInfo = JSON.parse(localStorage.getItem("usuarioCookie"))
       const pakcsInMemo = packages.map(pack => pack.id)
-      cookieInfo.packages = [...pakcsInMemo];
+      cookieInfo.packages = [...cookieInfo.packages ,...pakcsInMemo];
       updateUser(cookieInfo.id, cookieInfo)
       localStorage.setItem("usuarioCookie", JSON.stringify(cookieInfo))
+      localStorage.setItem("packages", JSON.stringify([]))
+      clearData()
     }
 
     const totalPrice = packages.reduce((acc, item) => acc + parseInt(item.price), 0);

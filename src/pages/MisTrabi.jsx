@@ -39,12 +39,12 @@ function MisTrabi() {
   }, []);
 
   async function cartPack(cardPack){
+    let datos = [...packPaid] 
     for(let i = 0; i< cardPack.length; i++){
       const data = await getPackage(cardPack[i])
-      const datos = []
       datos.push(data)
-      setPackPaid(datos)
     }
+    setPackPaid(datos)
   }
 
   const handleBack=()=>{
