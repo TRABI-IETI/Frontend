@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { PaqueteCard } from '../components/LugarBuyCard';
 import { memoryHook } from '../hooks/memoryHook';
 import { BotonScrollTop } from '../components/BotonScrollTop';
+import { updateUser } from '../services/loginServices';
 
 const items = [
     {
@@ -57,6 +58,15 @@ function ShoppingCart(){
       const handleBack=()=>{
         window.history.back()
       }
+
+    function handleBuy(){
+      let cookieInfo = JSON.parse(localStorage.getItem("usuarioCookie"))
+      const pakcsInMemo = packages.map(pack => pack.id)
+      cookieInfo.packages = [...pakcsInMemo];
+      updateUser(cookieInfo.id, cookieInfo)
+      localStorage.setItem("usuarioCookie", JSON.stringify(cookieInfo))
+    }
+
     const totalPrice = packages.reduce((acc, item) => acc + parseInt(item.price), 0);
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
@@ -75,7 +85,7 @@ function ShoppingCart(){
                     <Card textAlign={"center"} style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }}>
                         <Heading mb={10} mt={10} mr={10} ml={10}>Total a pagar:</Heading>
                         <p mr={10} ml={10}>Total: ${totalPrice}</p>
-                        <Button mb={10} mt={10} mr={10} ml={10} color="black" background="#f5d494">Pagar</Button>
+                        <Button mb={10} mt={10} mr={10} ml={10} color="black" background="#f5d494" onClick={handleBuy}>Pagar</Button>
                     </Card>
                 </Box>
             </div> 
