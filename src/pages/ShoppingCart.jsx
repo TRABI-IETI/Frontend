@@ -1,10 +1,11 @@
-import { useMediaQuery, Flex, Heading, Card, Image, Text, Stack, CardBody, CardFooter, Button, Box, SimpleGrid, IconButton  } from '@chakra-ui/react'
+import { useMediaQuery, Flex, Heading, Card, Image, Text, Stack, CardBody, CardFooter, Button, Box, SimpleGrid, IconButton, useStatStyles  } from '@chakra-ui/react'
 import { Usuario } from '../components/usuario';
 import { ArrowBackIcon } from "@chakra-ui/icons";
 import { useEffect } from "react";
 import { PaqueteCard } from '../components/LugarBuyCard';
 import { memoryHook } from '../hooks/memoryHook';
 import { BotonScrollTop } from '../components/BotonScrollTop';
+import { updateUser } from '../services/loginServices';
 
 const items = [
     {
@@ -42,8 +43,8 @@ const items = [
   
 
 function ShoppingCart(){
-    
-    const [packages, addPackages, removePackage] = memoryHook();
+
+    const [packages, addPackages, removePackage, clearData] = memoryHook();
 
     const [isLargerThanMd] = useMediaQuery("(min-width: 10vw)");
 
@@ -57,6 +58,17 @@ function ShoppingCart(){
       const handleBack=()=>{
         window.history.back()
       }
+
+    function handleBuy(){
+      let cookieInfo = JSON.parse(localStorage.getItem("usuarioCookie"))
+      const pakcsInMemo = packages.map(pack => pack.id)
+      cookieInfo.packages = [...cookieInfo.packages ,...pakcsInMemo];
+      updateUser(cookieInfo.id, cookieInfo)
+      localStorage.setItem("usuarioCookie", JSON.stringify(cookieInfo))
+      localStorage.setItem("packages", JSON.stringify([]))
+      clearData()
+    }
+
     const totalPrice = packages.reduce((acc, item) => acc + parseInt(item.price), 0);
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
@@ -75,7 +87,7 @@ function ShoppingCart(){
                     <Card textAlign={"center"} style={{ boxShadow: "20px 20px 10px rgba(0, 0, 0, 0.2)" }}>
                         <Heading mb={10} mt={10} mr={10} ml={10}>Total a pagar:</Heading>
                         <p mr={10} ml={10}>Total: ${totalPrice}</p>
-                        <Button mb={10} mt={10} mr={10} ml={10} color="black" background="#f5d494">Pagar</Button>
+                        <Button mb={10} mt={10} mr={10} ml={10} color="black" background="#f5d494" onClick={handleBuy}>Pagar</Button>
                     </Card>
                 </Box>
             </div> 

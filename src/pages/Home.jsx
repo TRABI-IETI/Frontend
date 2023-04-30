@@ -71,11 +71,14 @@ function Home() {
   const handleImageChange = (newIndex) => {
     setCurrentImage(items[newIndex].image);
   };
-
   const [packages, setPackages] = useState([]);
   const [lugarImagen, setLugarImagen] = useState([]);
   const {getImagePlace} = usePlaceHook();
   const [isLoading, setIsLoading] = useState(false);
+
+  if(!localStorage.getItem("packages")){
+    localStorage.setItem("packages", JSON.stringify([]));
+  }
 
   useEffect(() => {
     window.scrollTo(0, 0);

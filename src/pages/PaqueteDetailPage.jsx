@@ -87,7 +87,6 @@ const items = [
       lugaresProv = lugaresProv.filter(item => item !== place)
       paquete.places = lugaresProv
       paquete.price = parseFloat(paquete.price) - parseFloat(placePrice)
-      console.log(paquete)
       updatePackage(paqueteId, paquete).then(data=>{
         location.reload()
       });

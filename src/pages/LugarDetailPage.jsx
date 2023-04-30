@@ -8,14 +8,15 @@ import { useParams } from 'react-router';
 import { getPlace } from '../services/placesServices';
 import getPackages, { addPlaceToPackage, updatePackage } from '../services/packagesServices';
 import { BotonScrollTop } from '../components/BotonScrollTop';
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function LugarDetailPage(){
     const idUsuario = JSON.parse(localStorage.getItem("usuarioCookie")).id
     const {lugarId} = useParams();
     const [lugar, setLugar] = useState({});
-    const [packages, setPackages] = useState([])
+    const [packages, setPackages] = useState([]);
+    const navigate = useNavigate();
  
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -36,6 +37,11 @@ export default function LugarDetailPage(){
         }
     })
   }
+
+  const handleCrearPaquete=() => {
+    navigate("/misTrabi");
+  }
+
     return(
         <Flex flexDirection={{ base: 'column', md: 'column' }}>
                 {/* <Text fontSize="30" fontWeight="bold"  justifySelf="center">{lugarId}</Text> */}
@@ -62,7 +68,7 @@ export default function LugarDetailPage(){
                         </Text>
                     </Card>
                     <Stack spacing={4} direction='row' align='center' mt={4}>
-                    <Button bg="#f5d494" >Comprar</Button>
+                    {/* <Button bg="#f5d494" >Comprar</Button> */}
                     {packages.length ? (
                     <Menu>
                         <MenuButton bg="#f5d494" as={Button} rightIcon={<ChevronDownIcon />}>
@@ -75,7 +81,7 @@ export default function LugarDetailPage(){
                         </MenuList>
                     </Menu>
                     ) : (
-                    <Button bg="#f5d494">
+                    <Button bg="#f5d494" onClick={handleCrearPaquete}>
                         Crear paquete
                     </Button>
                     )}
